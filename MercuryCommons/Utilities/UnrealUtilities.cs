@@ -8,7 +8,6 @@ using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.Objects.UObject;
 using CUE4Parse.UE4.Vfs;
 using MercuryCommons.Framework.Unreal;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json.Linq;
 
 namespace MercuryCommons.Utilities;
@@ -23,7 +22,7 @@ public static class UnrealUtilities
         {
             JValue { Type: JTokenType.String } val => val.ToString(CultureInfo.InvariantCulture),
             string val => val,
-            StringValues val => val.ToString(),
+            object val => val.ToString() ?? string.Empty, // generic
             _ => string.Empty
         };
 
