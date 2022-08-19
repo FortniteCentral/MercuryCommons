@@ -5,8 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MySqlConnector" Version="2.1.12" />
       <PackageReference Include="SkiaSharp" Version="2.88.1" />
       <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.1" />
+      <PackageReference Include="TimeZoneConverter" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
