@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercuryCommons", "MercuryCommons\MercuryCommons.csproj", "{5B56705B-C254-4B04-9712-192E7A053E68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUE4Parse-Fortnite", "CUE4Parse\CUE4Parse-Fortnite\CUE4Parse-Fortnite.csproj", "{BDC635C8-3488-41D2-9A49-35EE9F1A8956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUE4Parse", "CUE4Parse\CUE4Parse\CUE4Parse.csproj", "{92C1CF26-6DCC-4714-ABF2-B72299618811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CUE4Parse-Conversion", "CUE4Parse\CUE4Parse-Conversion\CUE4Parse-Conversion.csproj", "{8624634D-DB1D-4362-98B9-688D37816CA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B56705B-C254-4B04-9712-192E7A053E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B56705B-C254-4B04-9712-192E7A053E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B56705B-C254-4B04-9712-192E7A053E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B56705B-C254-4B04-9712-192E7A053E68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC635C8-3488-41D2-9A49-35EE9F1A8956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC635C8-3488-41D2-9A49-35EE9F1A8956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC635C8-3488-41D2-9A49-35EE9F1A8956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC635C8-3488-41D2-9A49-35EE9F1A8956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92C1CF26-6DCC-4714-ABF2-B72299618811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92C1CF26-6DCC-4714-ABF2-B72299618811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92C1CF26-6DCC-4714-ABF2-B72299618811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92C1CF26-6DCC-4714-ABF2-B72299618811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8624634D-DB1D-4362-98B9-688D37816CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8624634D-DB1D-4362-98B9-688D37816CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8624634D-DB1D-4362-98B9-688D37816CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8624634D-DB1D-4362-98B9-688D37816CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

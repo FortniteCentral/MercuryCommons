@@ -1,6 +1,6 @@
-﻿namespace MercuryCommons.Framework.Data;
+﻿using System;
 
-public class Disabled
-{
-    
-}
+namespace MercuryCommons.Framework.Data;
+
+[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+public class Disabled : Attribute { }
