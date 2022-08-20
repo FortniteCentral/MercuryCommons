@@ -14,6 +14,6 @@ public class CloudstorageSystemResponse
     [J] public string ContentType { get; set; }
     [J] public DateTime Uploaded { get; set; }
     [J] public string StorageType { get; set; }
-    [J] public IDictionary<string, string> StorageIds { get; set; }
+    [J] public Dictionary<string, string> StorageIds { get; set; }
     [J] public bool DoNotCache { get; set; }
 }

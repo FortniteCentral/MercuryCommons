@@ -137,7 +137,7 @@ public class AccountPublicService : BaseService
     public async Task<FortniteResponse<AuthResponse>> AuthWithExchangeAsync(
         ExchangeCode exchangeCode,
         ClientToken clientToken = null,
-        CancellationToken cancellationToken = default) 
+        CancellationToken cancellationToken = default)
         => await AuthWithExchangeAsync(exchangeCode.Code, clientToken, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc cref="AuthWithExchangeAsync(ExchangeCode,ClientToken,System.Threading.CancellationToken)"/>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MercuryCommons.Framework.Fortnite.API.Objects;
+using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 using MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
 using RestSharp;
 
@@ -30,10 +31,31 @@ public class FortnitePublicService : BaseService
         return response;
     }
 
+    public byte[] GetCloudstorageFile(string uniqueFilename)
+    {
+        var request = new RestRequest($"/fortnite/api/cloudstorage/system/{uniqueFilename}");
+        var response = DownloadFile(request, true);
+        return response;
+    }
+
     public async Task<FortniteResponse<string[]>> GetKeychainAsync()
     {
         var request = new RestRequest("/fortnite/api/storefront/v2/keychain");
         var response = await ExecuteAsync<string[]>(request, true);
+        return response;
+    }
+
+    public async Task<FortniteResponse<CatalogResponse>> GetCatalog()
+    {
+        var request = new RestRequest("/fortnite/api/storefront/v2/catalog");
+        var response = await ExecuteAsync<CatalogResponse>(request, true);
+        return response;
+    }
+
+    public async Task<FortniteResponse<TimelineResponse>> GetTimeline()
+    {
+        var request = new RestRequest("/fortnite/api/calendar/v1/timeline");
+        var response = await ExecuteAsync<TimelineResponse>(request, true);
         return response;
     }
 }

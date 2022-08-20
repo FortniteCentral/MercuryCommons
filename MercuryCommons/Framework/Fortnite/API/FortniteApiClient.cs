@@ -49,7 +49,7 @@ public class FortniteApiClient : IAsyncDisposable
     private LinksPublicService _linksPublicService;
 
     /// <summary>
-    /// Contains some of the links endpoints
+    /// Contains some of the links endpoints.
     /// </summary>
     public LinksPublicService LinksPublicService
     {
@@ -64,7 +64,7 @@ public class FortniteApiClient : IAsyncDisposable
     private LightswitchPublicService _lightswitchPublicService;
 
     /// <summary>
-    /// Contains all of the lightswitch endpoints
+    /// Contains all of the lightswitch endpoints.
     /// </summary>
     public LightswitchPublicService LightswitchPublicService
     {
@@ -76,6 +76,36 @@ public class FortniteApiClient : IAsyncDisposable
         set => _lightswitchPublicService = value;
     }
 
+    private FortnitePublicService _fortnitePublicService;
+    
+    /// <summary>
+    /// Contains most/all of the main fortnite endpoints.
+    /// </summary>
+    public FortnitePublicService FortnitePublicService
+    {
+        get
+        {
+            VerifyLogin();
+            return _fortnitePublicService;
+        }
+        set => _fortnitePublicService = value;
+    }
+
+    private CatalogPublicService _catalogPublicService;
+
+    /// <summary>
+    /// Contains most/all of the catalog endpoints.
+    /// </summary>
+    public CatalogPublicService CatalogPublicService
+    {
+        get
+        {
+            VerifyLogin();
+            return _catalogPublicService;
+        }
+        set => _catalogPublicService = value;
+    }
+    
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -101,6 +131,8 @@ public class FortniteApiClient : IAsyncDisposable
         DefaultClientToken = defaultClientToken;
         LinksPublicService = new LinksPublicService(this);
         LightswitchPublicService = new LightswitchPublicService(this);
+        FortnitePublicService = new FortnitePublicService(this);
+        CatalogPublicService = new CatalogPublicService(this);
         AccountPublicService = new AccountPublicService(this);
     }
 

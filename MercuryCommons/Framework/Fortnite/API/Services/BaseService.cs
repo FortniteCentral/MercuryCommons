@@ -22,6 +22,18 @@ public abstract class BaseService
         RestClient = client.CreateRestClient(this);
     }
 
+    internal virtual byte[] DownloadFile(
+        RestRequest request,
+        bool withAuth = false,
+        string accessToken = null)
+    {
+        if (withAuth) request.AddHeader("Authorization", $"bearer {accessToken ?? Client.CurrentLogin.AccessToken}");
+        var response = RestClient.Execute(request);
+        byte[] ret = null;
+        if (response.IsSuccessStatusCode) ret = response.RawBytes;
+        return ret;
+    }
+
     internal virtual async Task<FortniteResponse> ExecuteAsync(
         RestRequest request,
         bool withAuth = false,
