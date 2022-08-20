@@ -12,7 +12,7 @@
 - TBD
 - Includes modified versions of the following packages
     - [Fortnite.Net by thoo](https://github.com/thoo0224/Fortnite.Net)
-    - [Fortnite.Net by thoo](https://github.com/NotOfficer/EpicManifestParser)
+    - [EpicManifestParser by Officer](https://github.com/NotOfficer/EpicManifestParser)
 
 
 ## Contributing
