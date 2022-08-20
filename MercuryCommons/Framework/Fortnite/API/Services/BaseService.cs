@@ -5,6 +5,7 @@ using MercuryCommons.Framework.Fortnite.API.Exceptions;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using Newtonsoft.Json;
 using RestSharp;
+using Serilog;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
@@ -63,7 +64,7 @@ public abstract class BaseService
                 break;
         }
 
+        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription, (int) response.StatusCode, response.ResponseUri?.OriginalString);
         return fortniteResponse;
     }
-
 }
