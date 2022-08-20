@@ -7,8 +7,14 @@ using Serilog;
 
 namespace MercuryCommons.Framework.Data.Remote;
 
+/// <summary>
+/// Central entrypoint for all web requests through Mercury
+/// </summary>
 public static class MercuryWeb
 {
+    /// <summary>
+    /// Main web client for making requests through
+    /// </summary>
     private static readonly RestClient Client = new RestClient
     {
         Options =
@@ -18,6 +24,16 @@ public static class MercuryWeb
         }
     }.UseSerializer<JsonNetSerializer>();
 
+    /// <summary>
+    /// Execute request expecting a json response
+    /// </summary>
+    /// <param name="url">Url to request from</param>
+    /// <param name="parameters">Query parameters to include in the request</param>
+    /// <param name="headers">Headers to include in the request</param>
+    /// <param name="files">Files to include in the request</param>
+    /// <param name="method">HTTP method to use</param>
+    /// <typeparam name="T">JSON model to use in return value</typeparam>
+    /// <returns>JSON model created from json</returns>
     public static async Task<T> Execute<T>(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method)
@@ -54,12 +70,22 @@ public static class MercuryWeb
         return response.Data;
     }
 
-    public static async Task DownloadFileAsync(string fileLink, string path)
+    /// <summary>
+    /// Download a url to a file. Should only be used with urls where the filetype is known.
+    /// </summary>
+    /// <param name="url">Url of site</param>
+    /// <param name="path">Local file path to download to, including extension</param>
+    public static async Task DownloadFileAsync(string url, string path)
     {
-        var data = GetByteArray(fileLink);
+        var data = GetByteArray(url);
         await File.WriteAllBytesAsync(path, data);
     }
 
+    /// <summary>
+    /// Get the raw bytes of a URL, such as an image or binary data.
+    /// </summary>
+    /// <param name="url">Url of site</param>
+    /// <returns>Data of site, null if not successful</returns>
     public static byte[] GetByteArray(string url)
     {
         var request = new RestRequest(url);

@@ -32,6 +32,16 @@ public static class StringExtensions
         };
     }
 
+    public static void NotNullOrEmpty(this string str, string name)
+    {
+        if (string.IsNullOrEmpty(str)) throw new ArgumentException($"{name} can not be null or empty.", name);
+    }
+
+    public static void NotNull(this object obj, string name)
+    {
+        if (obj == null) throw new ArgumentException($"{name} can not be null.", name);
+    }
+    
     public static string EncodeBase64(this string input) => Convert.ToBase64String(input.ToHexByteArray());
 
     public static string DecodeBase64(this string input)

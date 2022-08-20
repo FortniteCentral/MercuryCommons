@@ -8,9 +8,9 @@ namespace MercuryCommons.Framework.Unreal;
 
 public abstract class CustomFileProvider : AbstractVfsFileProvider // Used as a type base for other custom file provider implementations
 {
-    public CustomFileProvider(bool isCaseInsensitive = false, VersionContainer? versions = null) : base(isCaseInsensitive, versions) { }
+    public CustomFileProvider(bool isCaseInsensitive = false, VersionContainer versions = null) : base(isCaseInsensitive, versions) { }
 
-    public void Initialize(Func<string, Stream[], Func<string, FArchive?>> initializeFunction)
+    public void Initialize(Func<string, Stream[], Func<string, FArchive>> initializeFunction)
     {
         
     }
