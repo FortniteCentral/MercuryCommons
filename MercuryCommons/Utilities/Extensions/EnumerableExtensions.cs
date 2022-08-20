@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MercuryCommons.Utilities;
+namespace MercuryCommons.Utilities.Extensions;
 
-public static class EnumerableUtilities
+public static class EnumerableExtensions
 {
     public static IDictionary<string, T> ToCaseInsensitive<T>(this IDictionary<string, T> caseSensitiveDictionary)
     {
