@@ -77,7 +77,7 @@ public class FortniteApiClient : IAsyncDisposable
     }
 
     private FortnitePublicService _fortnitePublicService;
-    
+
     /// <summary>
     /// Contains most/all of the main fortnite endpoints.
     /// </summary>
@@ -105,7 +105,22 @@ public class FortniteApiClient : IAsyncDisposable
         }
         set => _catalogPublicService = value;
     }
-    
+
+    private LauncherPublicService _launcherPublicService;
+
+    /// <summary>
+    /// Contains most/all of the launcher endpoints.
+    /// </summary>
+    public LauncherPublicService LauncherPublicService
+    {
+        get
+        {
+            VerifyLogin();
+            return _launcherPublicService;
+        }
+        set => _launcherPublicService = value;
+    }
+
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -133,6 +148,7 @@ public class FortniteApiClient : IAsyncDisposable
         LightswitchPublicService = new LightswitchPublicService(this);
         FortnitePublicService = new FortnitePublicService(this);
         CatalogPublicService = new CatalogPublicService(this);
+        LauncherPublicService = new LauncherPublicService(this);
         AccountPublicService = new AccountPublicService(this);
     }
 
