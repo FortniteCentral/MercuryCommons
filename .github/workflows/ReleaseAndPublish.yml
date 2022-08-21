@@ -39,7 +39,7 @@ jobs:
         run: dotnet build MercuryCommons -c Release -o "."
 
       - name: Publish
-        run: nuget push **\*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
+        run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate
 
       - name: GIT Release
         uses: marvinpinto/action-automatic-releases@latest
