@@ -36,10 +36,9 @@ jobs:
         run: dotnet restore MercuryCommons
 
       - name: Build
-        run: dotnet build MercuryCommons -c Release
+        run: dotnet build MercuryCommons -c Release -o "."
 
       - name: Publish
-        if: startsWith(github.ref, 'refs/heads/master')
         run: nuget push **\*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
 
       - name: GIT Release
@@ -50,4 +49,4 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
           files: |
-            **\*.nupkg
+            *.nupkg
