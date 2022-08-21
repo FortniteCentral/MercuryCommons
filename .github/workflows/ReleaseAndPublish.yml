@@ -1,0 +1,53 @@
+﻿name: CI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GIT Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: Fetch Submodules Recursively
+        run: git submodule update --init --recursive
+
+      - name: Get Build Version
+        uses: bbonkr/get-version-action@v1.0.1
+        id: get_version
+        with:
+          project: "./MercuryCommons/MercuryCommons.csproj"
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: .NET 7 Setup
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '7.0.x'
+          include-prerelease: true
+
+      - name: Restore dependencies
+        run: dotnet restore MercuryCommons
+
+      - name: Build
+        run: dotnet build MercuryCommons -c Release
+
+      - name: Publish
+        if: startsWith(github.ref, 'refs/heads/master')
+        run: nuget push **\*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
+      - name: GIT Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          title: "Mercury Commons v${{ steps.get_version.outputs.version }}"
+          automatic_release_tag: ${{ steps.get_version.outputs.version }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true
+          files: |
+            **\*.nupkg
