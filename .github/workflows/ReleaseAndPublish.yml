@@ -1,9 +1,9 @@
 ﻿name: CI
 
 on:
-  push:
-    tags:
-      - '*'
+  create:
+    branches:
+      - release/**
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
         uses: bbonkr/get-version-action@v1.0.1
         id: get_version
         with:
-          project: "./MercuryCommons/MercuryCommons.csproj"
+          project: "./MercuryCommons.csproj"
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
