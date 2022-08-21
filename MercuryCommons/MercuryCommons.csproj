@@ -4,9 +4,25 @@
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Version>0.0.1-Test</Version>
+        <Authors>GMatrixGames</Authors>
+        <Description>A common utility package for CUE4Parse and interfacing with Epic Games/Fortnite services.</Description>
+        <Copyright>Copyright (c) 2022 GMatrixGames</Copyright>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/FortniteCentral/MercuryCommons</PackageProjectUrl>
+        <PackageIconUrl>https://i.ibb.co/P6YYF7P/Mercury.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/FortniteCentral/MercuryCommons.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath />
+        </None>
+    </ItemGroup>
+    
     <ItemGroup>
       <PackageReference Include="GenericReader" Version="1.0.3" />
       <PackageReference Include="MySqlConnector" Version="2.1.12" />
