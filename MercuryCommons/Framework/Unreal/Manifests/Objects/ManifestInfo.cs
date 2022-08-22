@@ -83,11 +83,8 @@ public class ManifestInfo
             return File.ReadAllBytes(path);
         }
 
-        using var wc = new WebClient
-        {
-            Proxy = null
-        };
-        var data = wc.DownloadData(Uri);
+        using var wc = new HttpClient();
+        var data = wc.GetByteArrayAsync(Uri).GetAwaiter().GetResult();
 
         if (path != null)
         {
