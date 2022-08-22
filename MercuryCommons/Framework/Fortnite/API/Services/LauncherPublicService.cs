@@ -31,7 +31,7 @@ public class LauncherPublicService : BaseService
         if (!launcher.IsSuccessful) return null;
         var request = new RestRequest($"/launcher/api/public/assets/v2/platform/{platform}/namespace/{@namespace}/catalogItem/{catalogId}/app/{appId}/label/{label}", Method.Post);
         if (@namespace == "fn" && platform == "Android" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
-        var response = await ExecuteAsync<object>(request, true, accessToken: launcher.Data.AccessToken);
+        var response = await ExecuteAsync<object>(request, true, accessToken: launcher.Data.AccessToken, requiresLogin: false);
         return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
     }
 
@@ -44,7 +44,7 @@ public class LauncherPublicService : BaseService
         var launcher = await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2);
         if (!launcher.IsSuccessful) return null;
         var request = new RestRequest("/launcher/api/public/assets/v2/platform/Windows/launcher/label/Live-Firebrand", Method.Post);
-        var response = await ExecuteAsync<object>(request, true, accessToken: launcher.Data.AccessToken);
+        var response = await ExecuteAsync<object>(request, true, accessToken: launcher.Data.AccessToken, requiresLogin: false);
         return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data), 1) : null;
     }
 }
