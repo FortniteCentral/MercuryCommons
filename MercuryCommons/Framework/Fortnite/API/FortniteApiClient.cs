@@ -23,7 +23,7 @@ namespace MercuryCommons.Framework.Fortnite.API;
 /// </summary>
 public class FortniteApiClient : IAsyncDisposable
 {
-    internal AuthConfig AuthConfig { get; set; }
+    public AuthConfig AuthConfig { get; set; }
     internal ClientToken DefaultClientToken { get; set; }
 
     /// <summary>
@@ -125,6 +125,8 @@ public class FortniteApiClient : IAsyncDisposable
     /// Contains most/all of the account endpoints.
     /// </summary>
     public AccountPublicService AccountPublicService { get; set; }
+    
+    public FortniteContentWebsite ContentWebsite { get; set; }
 
     private readonly Action<RestClient> _restClientAction;
     private readonly string _userAgent;
@@ -150,6 +152,7 @@ public class FortniteApiClient : IAsyncDisposable
         CatalogPublicService = new CatalogPublicService(this);
         LauncherPublicService = new LauncherPublicService(this);
         AccountPublicService = new AccountPublicService(this);
+        ContentWebsite = new FortniteContentWebsite(this);
     }
 
     /// <summary>
@@ -219,9 +222,7 @@ public class FortniteApiClient : IAsyncDisposable
                 "Tried to login with an authorization code, but there was no code specified in the call or the client builder.");
         }
 
-        var authorizationAuth = await AccountPublicService
-            .AuthWithAuthorizationCodeAsync(codeUsed, clientToken, cancellationToken)
-            .ConfigureAwait(false);
+        var authorizationAuth = await AccountPublicService.AuthWithAuthorizationCodeAsync(codeUsed, clientToken, cancellationToken).ConfigureAwait(false);
         if (!authorizationAuth.IsSuccessful)
         {
             throw new FortniteException("Failed to authenticate with the authorization code",

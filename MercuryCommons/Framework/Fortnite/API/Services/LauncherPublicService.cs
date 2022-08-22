@@ -12,6 +12,10 @@ public class LauncherPublicService : BaseService
 
     public LauncherPublicService(FortniteApiClient client) : base(client) { }
 
+    // Uses default Label
+    public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items)
+        => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4);
+
     /// <summary>
     /// Gets the manifest information for the specified game
     /// </summary>

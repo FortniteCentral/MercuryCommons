@@ -3,7 +3,7 @@ using MercuryCommons.Framework.Fortnite.API.Objects.Auth;
 
 namespace MercuryCommons.Framework.Fortnite.API.Config;
 
-internal class AuthConfig
+public class AuthConfig
 {
     /// <summary>
     /// Authorization code

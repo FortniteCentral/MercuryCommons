@@ -45,14 +45,14 @@ public class FortnitePublicService : BaseService
         return response;
     }
 
-    public async Task<FortniteResponse<CatalogResponse>> GetCatalog()
+    public async Task<FortniteResponse<CatalogResponse>> GetCatalogAsync()
     {
         var request = new RestRequest("/fortnite/api/storefront/v2/catalog");
         var response = await ExecuteAsync<CatalogResponse>(request, true);
         return response;
     }
 
-    public async Task<FortniteResponse<TimelineResponse>> GetTimeline()
+    public async Task<FortniteResponse<TimelineResponse>> GetTimelineAsync()
     {
         var request = new RestRequest("/fortnite/api/calendar/v1/timeline");
         var response = await ExecuteAsync<TimelineResponse>(request, true);

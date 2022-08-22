@@ -14,13 +14,14 @@ public class ManifestInfo
 {
     public string AppName { get; }
     public string LabelName { get; }
-    public string BuildVersion { get; }
+    public string BuildVersion { get; set; }
     public Version Version { get; }
     public int CL { get; }
     public string Hash { get; }
     public Uri Uri { get; }
     public string FileName { get; }
 
+    public ManifestInfo() { }
     public ManifestInfo(Stream jsonStream, int idx = 0) : this(JsonDocument.Parse(jsonStream), idx) { }
     public ManifestInfo(byte[] jsonBytes, int idx = 0) : this(JsonDocument.Parse(jsonBytes), idx) { }
     public ManifestInfo(string jsonString, int idx = 0) : this(JsonDocument.Parse(jsonString), idx) { }

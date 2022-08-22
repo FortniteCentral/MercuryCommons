@@ -10,7 +10,7 @@ namespace MercuryCommons.Framework.Data.Remote;
 /// <summary>
 /// Central entrypoint for all web requests through Mercury
 /// </summary>
-public static class MercuryWeb
+public class MercuryWeb
 {
     /// <summary>
     /// Main web client for making requests through
