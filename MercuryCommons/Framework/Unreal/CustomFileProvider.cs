@@ -23,6 +23,8 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
     private readonly SearchOption _searchOption;
     private readonly List<DirectoryInfo> _extraDirectories = new();
 
+    public CustomFileProvider(bool isCaseInsensitive = false, VersionContainer versions = null) : base(isCaseInsensitive, versions) { }
+
     public CustomFileProvider(string directory, SearchOption searchOption, bool isCaseInsensitive = false, VersionContainer versions = null)
         : this(new DirectoryInfo(directory), searchOption, isCaseInsensitive, versions) { }
 
