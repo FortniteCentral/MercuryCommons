@@ -1,9 +1,9 @@
-﻿name: CI
+name: CI
 
 on:
-  create:
-    branches:
-      - release/**
+  push:
+    tags:
+      - 'release/**'
 
 jobs:
   build:
