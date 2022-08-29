@@ -1,9 +1,9 @@
-﻿name: CI
+name: CI
 
 on:
-  create:
-    branches:
-      - release/**
+  push:
+    tags:
+      - 'release/**'
 
 jobs:
   build:
@@ -47,6 +47,6 @@ jobs:
           title: "Mercury Commons v${{ steps.get_version.outputs.version }}"
           automatic_release_tag: ${{ steps.get_version.outputs.version }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: true
+          prerelease: false
           files: |
             *.nupkg

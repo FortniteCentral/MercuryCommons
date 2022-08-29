@@ -1,4 +1,4 @@
-# Mercury Common [![Discord](https://discordapp.com/api/guilds/708370560501153913/widget.png?style=shield)](https://discord.gg/ETePR8VgQf) [![NuGet](https://img.shields.io/nuget/vpre/MercuryCommons)](https://www.nuget.org/packages/MercuryCommons)
+# Mercury Commons [![Discord](https://discordapp.com/api/guilds/708370560501153913/widget.png?style=shield)](https://discord.gg/ETePR8VgQf) [![NuGet](https://img.shields.io/nuget/vpre/MercuryCommons)](https://www.nuget.org/packages/MercuryCommons)
 
 ![Logo](https://i.ibb.co/KFZM8gR/image.png)
 
