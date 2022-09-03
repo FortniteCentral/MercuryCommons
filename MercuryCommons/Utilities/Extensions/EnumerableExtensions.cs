@@ -15,4 +15,12 @@ public static class EnumerableExtensions
 
     public static T AtIndexOrFirst<T>(this IList<T> enumerable, int index) => enumerable.Count < index ? enumerable[index] : enumerable.FirstOrDefault();
     public static T AtIndexOrFirst<T>(this T[] enumerable, int index) => enumerable.Length < index ? enumerable[index] : enumerable.FirstOrDefault();
+
+    public static void AddRange<T>(this ISet<T> set, IEnumerable<T> items)
+    {
+        foreach (var t in items)
+        {
+            set.Add(t);
+        }
+    }
 }
