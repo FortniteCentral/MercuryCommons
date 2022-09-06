@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
@@ -17,5 +18,28 @@ public class FortniteContentWebsite : BaseService
         request.AddParameter("lang", lang);
         var response = await ExecuteAsync<ContentResponse>(request);
         return response;
+    }
+
+    public async Task<FortniteResponse<FortTournamentInformation>> GetContentTournamentsAsync(string lang = "en")
+    {
+        var request = new RestRequest("/content/api/pages/fortnite-game/tournamentinformation");
+        request.AddParameter("lang", lang);
+        var data = await ExecuteAsync<JObject>(request);
+        if (!data.IsSuccessful)
+        {
+            return new FortniteResponse<FortTournamentInformation>
+            {
+                Data = null,
+                Error = data.Error,
+                HttpStatusCode = data.HttpStatusCode
+            };
+        }
+
+        var d = data.Data["tournament_info"];
+
+        var a = "";
+        // var response = data.Data["tournament_info"]?.ToObject<FortTournamentInformation>();
+        // return response;
+        return null;
     }
 }
