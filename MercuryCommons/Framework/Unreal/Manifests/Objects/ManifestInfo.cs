@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -71,7 +72,7 @@ public class ManifestInfo
             manifestUriBuilders.Add(uriBuilder);
         }
 
-        Uri = (manifestUriBuilders.Find(x => x.Query.Length == 0) ?? manifestUriBuilders[0]).Uri;
+        Uri = (manifestUriBuilders.Find(x => x.Query.Length == 0) ?? manifestUriBuilders.Last()).Uri;
         FileName = Uri.Segments[^1];
     }
 
