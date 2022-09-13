@@ -19,7 +19,7 @@ public class ManifestInfo
     public Version Version { get; }
     public int CL { get; }
     public string Hash { get; }
-    public Uri Uri { get; }
+    public List<UriBuilder> Uris { get; } = new();
     public string FileName { get; }
 
     public ManifestInfo() { }
@@ -52,12 +52,11 @@ public class ManifestInfo
 
             if (manifestElement.TryGetProperty("queryParams", out var queryParamsArray))
             {
-                foreach (var queryParam in queryParamsArray.EnumerateArray())
+                foreach (var query in from queryParam in queryParamsArray.EnumerateArray()
+                         let queryParamName = queryParam.GetProperty("name").GetString()
+                         let queryParamValue = queryParam.GetProperty("value").GetString()
+                         select $"{queryParamName}={queryParamValue}")
                 {
-                    var queryParamName = queryParam.GetProperty("name").GetString();
-                    var queryParamValue = queryParam.GetProperty("value").GetString();
-                    var query = $"{queryParamName}={queryParamValue}";
-
                     if (uriBuilder.Query.Length == 0)
                     {
                         uriBuilder.Query = query;
@@ -72,8 +71,8 @@ public class ManifestInfo
             manifestUriBuilders.Add(uriBuilder);
         }
 
-        Uri = (manifestUriBuilders.Find(x => x.Query.Length == 0) ?? manifestUriBuilders.Last()).Uri;
-        FileName = Uri.Segments[^1];
+        Uris.AddRange(manifestUriBuilders);
+        FileName = Uris.FirstOrDefault()?.Uri.Segments[^1];
     }
 
     public byte[] DownloadManifestData(string cacheDir = null)
@@ -85,10 +84,22 @@ public class ManifestInfo
             return File.ReadAllBytes(path);
         }
 
-        using var wc = new HttpClient();
-        var data = wc.GetByteArrayAsync(Uri).GetAwaiter().GetResult();
+        using var client = new HttpClient();
+        byte[] data = null;
 
-        if (path != null)
+        foreach (var uri in Uris.TakeWhile(_ => data == null))
+        {
+            try
+            {
+                data = client.GetByteArrayAsync(uri.Uri).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                data = null;
+            }
+        }
+
+        if (path != null && data != null)
         {
             File.WriteAllBytes(path, data);
         }
@@ -111,9 +122,21 @@ public class ManifestInfo
         }
 
         using var client = new HttpClient();
-        var data = await client.GetByteArrayAsync(Uri).ConfigureAwait(false);
+        byte[] data = null;
 
-        if (path != null)
+        foreach (var uri in Uris.TakeWhile(_ => data == null))
+        {
+            try
+            {
+                data = await client.GetByteArrayAsync(uri.Uri).ConfigureAwait(false);
+            }
+            catch
+            {
+                data = null;
+            }
+        }
+
+        if (path != null && data != null)
         {
             await File.WriteAllBytesAsync(path, data).ConfigureAwait(false);
         }
