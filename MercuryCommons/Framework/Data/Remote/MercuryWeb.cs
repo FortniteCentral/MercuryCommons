@@ -91,7 +91,7 @@ public class MercuryWeb
         var request = new RestRequest(url);
         var data = Client.Execute(request);
         byte[] retData = null;
-        if (data.IsSuccessStatusCode) retData = Client.DownloadData(request);
+        if (data.IsSuccessful) retData = Client.DownloadData(request);
         return retData;
     }
 }

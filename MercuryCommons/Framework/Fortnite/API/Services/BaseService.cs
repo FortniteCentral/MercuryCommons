@@ -30,7 +30,7 @@ public abstract class BaseService
         if (withAuth) request.AddHeader("Authorization", $"bearer {accessToken ?? Client.CurrentLogin.AccessToken}");
         var response = RestClient.Execute(request);
         byte[] ret = null;
-        if (response.IsSuccessStatusCode) ret = response.RawBytes;
+        if (response.IsSuccessful) ret = response.RawBytes;
         return ret;
     }
 
