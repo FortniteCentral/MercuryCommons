@@ -4,11 +4,6 @@ using E = Newtonsoft.Json.JsonExtensionDataAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 
-public class ItemIdResponse
-{
-    [J, E] public Dictionary<string, object> OfferIds { get; set; }
-}
-
 public class ItemIdInfo
 {
     [J] public string Id { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 using RestSharp;
@@ -11,10 +12,31 @@ public class CatalogPublicService : BaseService
 
     public CatalogPublicService(FortniteApiClient client) : base(client) { }
 
-    public async Task<FortniteResponse<ItemIdResponse>> GetItemIdInfo(string itemId)
+    public async Task<FortniteResponse<Dictionary<string, ItemIdInfo>>> GetItemIdInfo(IEnumerable<string> itemIds, bool returnItemDetails = false, string country = "NZ", string locale = "en")
     {
-        var request = new RestRequest($"/catalog/api/shared/bulk/items?id={itemId}&returnItemDetails=false&country=NZ&locale=en");
-        var response = await ExecuteAsync<ItemIdResponse>(request, true);
+        var request = new RestRequest("/catalog/api/shared/bulk/items");
+        foreach (var offerId in itemIds)
+        {
+            request.AddParameter("id", offerId);
+        }
+        request.AddParameter("returnItemDetails", returnItemDetails);
+        request.AddParameter("country", country);
+        request.AddParameter("locale", locale);
+        var response = await ExecuteAsync<Dictionary<string, ItemIdInfo>>(request, true);
+        return response;
+    }
+
+    public async Task<FortniteResponse<Dictionary<string, OfferIdInfo>>> GetOfferIdInfo(IEnumerable<string> offerIds, bool returnItemDetails = false, string country = "NZ", string locale = "en")
+    {
+        var request = new RestRequest("/catalog/api/shared/bulk/offers");
+        foreach (var offerId in offerIds)
+        {
+            request.AddParameter("id", offerId);
+        }
+        request.AddParameter("returnItemDetails", returnItemDetails);
+        request.AddParameter("country", country);
+        request.AddParameter("locale", locale);
+        var response = await ExecuteAsync<Dictionary<string, OfferIdInfo>>(request, true);
         return response;
     }
 }

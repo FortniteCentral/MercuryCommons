@@ -133,6 +133,14 @@ public class FortniteApiClient : IAsyncDisposable
         set => _discoveryService = value;
     }
 
+    private GraphQLService _graphQlService;
+
+    public GraphQLService GraphQlService
+    {
+        get => _graphQlService;
+        set => _graphQlService = value;
+    }
+
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -166,6 +174,7 @@ public class FortniteApiClient : IAsyncDisposable
         DiscoveryService = new DiscoveryService(this);
         AccountPublicService = new AccountPublicService(this);
         ContentWebsite = new FortniteContentWebsite(this);
+        GraphQlService = new GraphQLService(this);
     }
 
     /// <summary>

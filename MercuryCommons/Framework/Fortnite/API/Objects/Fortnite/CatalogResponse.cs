@@ -1,8 +1,7 @@
 ﻿using System;
-using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
+namespace MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
 
 public class CatalogResponse
 {
