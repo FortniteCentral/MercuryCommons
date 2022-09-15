@@ -34,7 +34,7 @@ public class MercuryWeb
     /// <param name="method">HTTP method to use</param>
     /// <typeparam name="T">JSON model to use in return value</typeparam>
     /// <returns>JSON model created from json</returns>
-    public static async Task<T> Execute<T>(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, Method method = Method.Get)
+    public static async Task<T> Execute<T>(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method)
         {
@@ -65,6 +65,8 @@ public class MercuryWeb
             }
         }
 
+        if (body != null) request.AddJsonBody(body);
+        
         var response = await Client.ExecuteAsync<T>(request).ConfigureAwait(false);
         Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, response.ResponseUri?.OriginalString ?? "null");
         return response.Data;
