@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace MercuryCommons.Utilities.Extensions;
 
 public static class StringExtensions
 {
+    public static string GetSHA1Hash(this string text)
+    {
+        using var cryptoProvider = SHA1.Create();
+        return BitConverter.ToString(cryptoProvider.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", string.Empty).ToLower();
+    }
+    
     public static string GetSHA1Hash(this byte[] bytes)
     {
         using var cryptoProvider = SHA1.Create();
