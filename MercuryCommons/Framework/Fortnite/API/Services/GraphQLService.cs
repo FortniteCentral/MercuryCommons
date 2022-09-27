@@ -13,7 +13,7 @@ public class GraphQLService : BaseService
 
     internal GraphQLService(FortniteApiClient client) : base(client) { }
 
-    public async Task<GQLCatalogResponse> GetRelatedOfferIds(string nmspc, string[] countries, string country = "NZ", string locale = "en-US", bool codeRedemptionOnly = false, string category = "addons|digitalextras")
+    public async Task<GQLCatalogRelatedResponse> GetRelatedOfferIds(string nmspc, string[] countries, string country = "NZ", string locale = "en-US", bool codeRedemptionOnly = false, string category = "addons|digitalextras")
     {
         var request = new RestRequest();
         request.AddParameter("operationName", "getRelatedOfferIdsByCategory");
@@ -40,6 +40,32 @@ public class GraphQLService : BaseService
         
         var response = await ExecuteAsync<JObject>(request);
         var data = response.Data?["data"]?["Catalog"]?["catalogOffers"];
-        return data?.ToObject<GQLCatalogResponse>();
+        return data?.ToObject<GQLCatalogRelatedResponse>();
+    }
+
+    public async Task<GQLCatalogOfferResponse> GetCatalogOffer(string offerId, string sandboxId, string country = "NZ", string locale = "en-US")
+    {
+        var request = new RestRequest();
+        request.AddParameter("operationName", "getCatalogOffer");
+        request.AddParameter("variables", JsonConvert.SerializeObject(new
+        {
+            locale,
+            country,
+            offerId,
+            sandboxId
+        }));
+
+        request.AddParameter("extensions", JsonConvert.SerializeObject(new
+        {
+            persistedQuery = new
+            {
+                version = 1,
+                sha256Hash = "546b92042e42306dfe422cf844e02aa8fbc3aff2d949ddecff8248b39badc040"
+            }
+        }));
+        
+        var response = await ExecuteAsync<JObject>(request);
+        var data = response.Data?["data"]?["Catalog"]?["catalogOffer"];
+        return data?.ToObject<GQLCatalogOfferResponse>();
     }
 }

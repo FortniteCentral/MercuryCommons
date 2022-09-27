@@ -3,7 +3,7 @@ using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.GraphQL;
 
-public class GQLCatalogResponse
+public class GQLCatalogRelatedResponse
 {
     [J] public CatalogElement[] Elements { get; set; }
     [J] public Paging Paging { get; set; }
