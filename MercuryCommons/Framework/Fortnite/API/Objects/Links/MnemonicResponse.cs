@@ -23,11 +23,14 @@ public class MnemonicResponse
 
 public class MnemonicMetadata
 {
+    [J] public string DisplayDataId { get; set; }
     [J("alt_image_urls")] public Dictionary<string, Dictionary<string, string>> AltImageUrls { get; set; } = new();
     [J("alt_image_url")] public Dictionary<string, string> AltImageUrl { get; set; } = new();
     [J("image_url")] public string ImageUrl { get; set; }
     [J("image_urls")] public Dictionary<string, string> ImageUrls { get; set; } = new();
     [J] public string Title { get; set; }
+    [J("sub_link_codes")] public string[] SubLinkCodes { get; set; }
+    [J("default_sub_link_code")] public string DefaultSubLinkCode { get; set; }
     [J] public MnemonicMatchmaking Matchmaking { get; set; }
     [J] public string QuestContextTag { get; set; } // Important for leaked creative challenges
     [J] public string Mode { get; set; } // Valkyrie
