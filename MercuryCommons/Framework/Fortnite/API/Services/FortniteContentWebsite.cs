@@ -20,14 +20,14 @@ public class FortniteContentWebsite : BaseService
         return response;
     }
 
-    public async Task<FortniteResponse<FortTournamentInformation>> GetContentTournamentsAsync(string lang = "en")
+    public async Task<FortniteResponse<FortTournament[]>> GetContentTournamentsAsync(string lang = "en")
     {
         var request = new RestRequest("/content/api/pages/fortnite-game/tournamentinformation");
         request.AddParameter("lang", lang);
         var data = await ExecuteAsync<JObject>(request);
         if (!data.IsSuccessful)
         {
-            return new FortniteResponse<FortTournamentInformation>
+            return new FortniteResponse<FortTournament[]>
             {
                 Data = null,
                 Error = data.Error,
@@ -35,11 +35,10 @@ public class FortniteContentWebsite : BaseService
             };
         }
 
-        var d = data.Data["tournament_info"];
-
-        var a = "";
-        // var response = data.Data["tournament_info"]?.ToObject<FortTournamentInformation>();
-        // return response;
-        return null;
+        var response = data.Data["tournament_info"]?["tournaments"]?.ToObject<FortTournament[]>();
+        return new FortniteResponse<FortTournament[]>
+        {
+            Data = response,
+        };
     }
 }
