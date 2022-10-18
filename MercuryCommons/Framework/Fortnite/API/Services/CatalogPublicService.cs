@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 using RestSharp;
@@ -9,8 +10,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class CatalogPublicService : BaseService
 {
     public override string BaseUrl => "https://catalog-public-service-prod06.ol.epicgames.com";
+    public override string StageUrl => "https://catalogv2-public-service-stage.ol.epicgames.com";
 
-    public CatalogPublicService(FortniteApiClient client) : base(client) { }
+    public CatalogPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<Dictionary<string, ItemIdInfo>>> GetItemIdInfo(IEnumerable<string> itemIds, bool returnItemDetails = false, string country = "NZ", string locale = "en")
     {

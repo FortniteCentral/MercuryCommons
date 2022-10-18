@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MercuryCommons.Framework.Data.Remote;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Exceptions;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using Newtonsoft.Json;
@@ -11,14 +12,24 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 
 public abstract class BaseService
 {
+    public string UrlToUse { get; }
     public abstract string BaseUrl { get; }
+    public abstract string StageUrl { get; }
 
     internal FortniteApiClient Client { get; set; }
     internal RestClient RestClient { get; set; }
+    internal EEnvironment Environment { get; set; }
 
-    internal BaseService(FortniteApiClient client)
+    internal BaseService(FortniteApiClient client, EEnvironment environment)
     {
         Client = client;
+        Environment = environment;
+        UrlToUse = Environment switch
+        {
+            EEnvironment.Prod => BaseUrl,
+            EEnvironment.Stage => StageUrl,
+            _ => UrlToUse
+        };
         RestClient = client.CreateRestClient(this);
     }
 

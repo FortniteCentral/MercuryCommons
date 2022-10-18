@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Links;
 using RestSharp;
@@ -8,8 +9,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class LinksPublicService : BaseService
 {
     public override string BaseUrl => "https://links-public-service-live.ol.epicgames.com";
+    public override string StageUrl => "https://links-public-service-stage.ol.epicgames.com";
 
-    internal LinksPublicService(FortniteApiClient client) : base(client) { }
+    internal LinksPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<MnemonicResponse>> GetMnemonicAsync(
         string mnemonic,

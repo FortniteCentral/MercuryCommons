@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 using MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
@@ -9,8 +10,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class FortnitePublicService : BaseService
 {
     public override string BaseUrl => "https://fortnite-public-service-prod11.ol.epicgames.com";
+    public override string StageUrl => "https://fortnite-public-service-stage.ol.epicgames.com";
 
-    internal FortnitePublicService(FortniteApiClient client) : base(client) { }
+    internal FortnitePublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<CloudstorageSystemResponse[]>> GetCloudstorageSystemAsync()
     {

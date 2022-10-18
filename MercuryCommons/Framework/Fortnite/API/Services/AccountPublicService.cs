@@ -14,8 +14,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class AccountPublicService : BaseService
 {
     public override string BaseUrl => "https://account-public-service-prod.ol.epicgames.com";
+    public override string StageUrl => "https://account-public-service-stage.ol.epicgames.com";
 
-    internal AccountPublicService(FortniteApiClient client) : base(client) { }
+    internal AccountPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     /// <summary>
     /// Authenticates with <paramref name="grantType"/>
@@ -148,6 +149,18 @@ public class AccountPublicService : BaseService
     {
         exchangeCode.NotNullOrEmpty(nameof(exchangeCode));
         var response = await GetAccessTokenAsync(GrantType.ExchangeCode, clientToken, cancellationToken, ("exchange_code", exchangeCode)).ConfigureAwait(false);
+        return response;
+    }
+
+    public async Task<FortniteResponse<AuthResponse>> AuthWithPasswordAsync(
+        string username,
+        string password,
+        ClientToken clientToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        username.NotNullOrEmpty(nameof(username));
+        password.NotNullOrEmpty(nameof(password));
+        var response = await GetAccessTokenAsync(GrantType.Password, clientToken, cancellationToken, ("username", username), ("password", password)).ConfigureAwait(false);
         return response;
     }
 

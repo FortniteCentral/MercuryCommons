@@ -145,7 +145,7 @@ public class FortniteApiClient : IAsyncDisposable
     /// Contains most/all of the account endpoints.
     /// </summary>
     public AccountPublicService AccountPublicService { get; }
-    
+
     public FortniteContentWebsite ContentWebsite { get; }
 
     private readonly Action<RestClient> _restClientAction;
@@ -166,15 +166,15 @@ public class FortniteApiClient : IAsyncDisposable
 
         AuthConfig = authConfig;
         DefaultClientToken = defaultClientToken;
-        LinksPublicService = new LinksPublicService(this);
-        LightswitchPublicService = new LightswitchPublicService(this);
-        FortnitePublicService = new FortnitePublicService(this);
-        CatalogPublicService = new CatalogPublicService(this);
-        LauncherPublicService = new LauncherPublicService(this);
-        DiscoveryService = new DiscoveryService(this);
-        AccountPublicService = new AccountPublicService(this);
-        ContentWebsite = new FortniteContentWebsite(this);
-        GraphQlService = new GraphQLService(this);
+        LinksPublicService = new LinksPublicService(this, defaultClientToken.Environment);
+        LightswitchPublicService = new LightswitchPublicService(this, defaultClientToken.Environment);
+        FortnitePublicService = new FortnitePublicService(this, defaultClientToken.Environment);
+        CatalogPublicService = new CatalogPublicService(this, defaultClientToken.Environment);
+        LauncherPublicService = new LauncherPublicService(this, defaultClientToken.Environment);
+        DiscoveryService = new DiscoveryService(this, defaultClientToken.Environment);
+        AccountPublicService = new AccountPublicService(this, defaultClientToken.Environment);
+        ContentWebsite = new FortniteContentWebsite(this, defaultClientToken.Environment);
+        GraphQlService = new GraphQLService(this, defaultClientToken.Environment);
     }
 
     /// <summary>
@@ -199,7 +199,7 @@ public class FortniteApiClient : IAsyncDisposable
             };
             var jobData = new JobDataMap(jobDataDictionary);
             var job = JobBuilder.Create<RefreshAccountJob>()
-                .WithIdentity("RefreshAccountJob")
+                .WithIdentity($"RefreshAccountJob{DefaultClientToken.Environment}")
                 .SetJobData(jobData)
                 .WithDescription("Job to refresh the current session.")
                 .Build();
@@ -382,9 +382,29 @@ public class FortniteApiClient : IAsyncDisposable
         return responseData;
     }
 
+    public async Task<AuthResponse> LoginWithPassword(
+        string username = "",
+        string password = "",
+        ClientToken clientToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        var response = await AccountPublicService
+            .AuthWithPasswordAsync(string.IsNullOrEmpty(username) ? AuthConfig.UserPassword.Item1 : username, string.IsNullOrEmpty(password) ? AuthConfig.UserPassword.Item2 : password, clientToken, cancellationToken)
+            .ConfigureAwait(false);
+        if (!response.IsSuccessful)
+        {
+            throw new FortniteException("Failed to authenticate with password.", response.Error);
+        }
+
+        var responseData = response.Data;
+        await OnLoginAsync(responseData);
+
+        return responseData;
+    }
+
     internal RestClient CreateRestClient(BaseService service)
     {
-        var restClient = new RestClient(service.BaseUrl);
+        var restClient = new RestClient(service.UrlToUse);
         _restClientAction?.Invoke(restClient);
         restClient.UseSerializer<JsonNetSerializer>();
         restClient.Options.UserAgent = _userAgent;

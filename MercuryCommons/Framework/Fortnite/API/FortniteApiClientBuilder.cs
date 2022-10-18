@@ -64,6 +64,18 @@ public class FortniteApiClientBuilder
     }
 
     /// <summary>
+    /// Configures the username and password
+    /// </summary>
+    /// <param name="username">Username to login with</param>
+    /// <param name="password">Password to login with</param>
+    /// <returns>Client builder</returns>
+    public FortniteApiClientBuilder WithUserPassword(string username, string password)
+    {
+        _authConfig.UserPassword = (username, password);
+        return this;
+    }
+    
+    /// <summary>
     /// Sets the device.
     /// </summary>
     /// <param name="accountId">Id of the account</param>

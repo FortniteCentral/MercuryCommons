@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Lightswitch;
 using RestSharp;
@@ -9,8 +10,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class LightswitchPublicService : BaseService
 {
     public override string BaseUrl => "https://lightswitch-public-service-prod06.ol.epicgames.com";
+    public override string StageUrl => "https://lightswitch-public-service-stage.ol.epicgames.com";
 
-    internal LightswitchPublicService(FortniteApiClient client) : base(client) { }
+    internal LightswitchPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<LightswitchResponse>> GetStatusAsync(string service)
     {

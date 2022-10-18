@@ -24,4 +24,9 @@ public class AuthConfig
     /// The refresh type
     /// </summary>
     public RefreshType RefreshType { get; set; } = RefreshType.OnCall;
+
+    /// <summary>
+    /// The username and password
+    /// </summary>
+    public (string, string) UserPassword { get; set; }
 }

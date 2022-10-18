@@ -9,8 +9,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class LauncherPublicService : BaseService
 {
     public override string BaseUrl => "https://launcher-public-service-prod06.ol.epicgames.com";
+    public override string StageUrl => "https://launcher-public-service-stage.ol.epicgames.com";
 
-    public LauncherPublicService(FortniteApiClient client) : base(client) { }
+    public LauncherPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     // Uses default Label
     public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects.GraphQL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,8 +11,9 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 public class GraphQLService : BaseService
 {
     public override string BaseUrl => "https://www.epicgames.com/graphql";
+    public override string StageUrl => "https://www.epicgames.com/graphql";
 
-    internal GraphQLService(FortniteApiClient client) : base(client) { }
+    internal GraphQLService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<GQLCatalogRelatedResponse> GetRelatedOfferIds(string nmspc, string[] countries, string country = "NZ", string locale = "en-US", bool codeRedemptionOnly = false, string category = "addons|digitalextras")
     {
