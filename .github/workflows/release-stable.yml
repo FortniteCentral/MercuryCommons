@@ -36,7 +36,7 @@ jobs:
         run: dotnet restore MercuryCommons
 
       - name: Build
-        run: dotnet build MercuryCommons -c Release -o "."
+        run: dotnet pack MercuryCommons\MercuryCommons.csproj -o "."
 
       - name: Publish
         run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate
