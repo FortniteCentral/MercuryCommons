@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using RestSharp;
@@ -94,6 +95,20 @@ public class MercuryWeb
         var data = Client.Execute(request);
         byte[] retData = null;
         if (data.IsSuccessful) retData = Client.DownloadData(request);
+        return retData;
+    }
+
+    /// <summary>
+    /// Get the raw bytes of a URL asynchronously, such as an image or binary data.
+    /// </summary>
+    /// <param name="url">Url of site</param>
+    /// <returns>Data of site, null if not successful</returns>
+    public static async Task<byte[]> GetByteArrayAsync(string url)
+    {
+        using var client = new HttpClient();
+        var data = await client.GetAsync(url);
+        byte[] retData = null;
+        if (data.IsSuccessStatusCode) retData = await data.Content.ReadAsByteArrayAsync();
         return retData;
     }
 }
