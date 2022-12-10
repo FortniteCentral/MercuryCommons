@@ -105,10 +105,10 @@ public class MercuryWeb
     /// <returns>Data of site, null if not successful</returns>
     public static async Task<byte[]> GetByteArrayAsync(string url)
     {
-        using var client = new HttpClient();
-        var data = await client.GetAsync(url);
+        var request = new RestRequest(url);
+        var data = await Client.ExecuteAsync(request);
         byte[] retData = null;
-        if (data.IsSuccessStatusCode) retData = await data.Content.ReadAsByteArrayAsync();
+        if (data.IsSuccessful) retData = await Client.DownloadDataAsync(request);
         return retData;
     }
 }
