@@ -126,6 +126,7 @@ public class MercuryWeb
     public static async Task DownloadFileAsync(string url, string path)
     {
         var data = await GetByteArrayAsync(url);
+        if (data is not { Length: > 0 }) data = await GetByteArrayAsync(url); // Try again
         await File.WriteAllBytesAsync(path, data);
     }
 
@@ -139,7 +140,7 @@ public class MercuryWeb
         var request = new MercuryRequest(url);
         var data = Client.Execute(request);
         byte[] retData = null;
-        if (data.IsSuccessful) retData = Client.DownloadData(request);
+        if (data.IsSuccessful) retData = data.RawBytes;
         return retData;
     }
 
@@ -153,7 +154,7 @@ public class MercuryWeb
         var request = new MercuryRequest(url);
         var data = await Client.ExecuteAsync(request);
         byte[] retData = null;
-        if (data.IsSuccessful) retData = await Client.DownloadDataAsync(request);
+        if (data.IsSuccessful) retData = data.RawBytes;
         return retData;
     }
 }
