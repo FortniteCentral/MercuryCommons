@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using RestSharp;
@@ -125,11 +126,22 @@ public class MercuryWeb
     /// <param name="path">Local file path to download to, including extension</param>
     public static async Task DownloadFileAsync(string url, string path)
     {
-        var data = await GetByteArrayAsync(url);
-        if (data is not { Length: > 0 }) data = await GetByteArrayAsync(url); // Try again
-        await File.WriteAllBytesAsync(path, data);
+        var stream = await GetStreamAsync(url);
+        await using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
+        await fileStream.CopyToAsync(stream);
     }
 
+    /// <summary>
+    /// Get a stream of data from a URL, such as an image or binary data.
+    /// </summary>
+    /// <param name="url">Url of site</param>
+    /// <returns>Data stream of site data</returns>
+    public static async Task<Stream> GetStreamAsync(string url)
+    {
+        var request = new MercuryRequest(url);
+        return await Client.DownloadStreamAsync(request);
+    }
+    
     /// <summary>
     /// Get the raw bytes of a URL, such as an image or binary data.
     /// </summary>
