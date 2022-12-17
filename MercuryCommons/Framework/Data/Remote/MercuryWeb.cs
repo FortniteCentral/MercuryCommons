@@ -128,7 +128,7 @@ public class MercuryWeb
     {
         var stream = await GetStreamAsync(url);
         await using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
-        await fileStream.CopyToAsync(stream);
+        await stream.CopyToAsync(fileStream);
     }
 
     /// <summary>
