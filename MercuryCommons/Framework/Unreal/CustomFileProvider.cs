@@ -109,7 +109,7 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
     /// Registers a local file into the provider
     /// </summary>
     /// <param name="file">Info for a file</param>
-    private void RegisterFile(FileInfo file)
+    public void RegisterFile(FileInfo file)
     {
         var ext = file.FullName.SubstringAfterLast('.');
         if (ext.Equals("pak", StringComparison.OrdinalIgnoreCase))
