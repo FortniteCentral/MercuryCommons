@@ -24,7 +24,9 @@
     <PackageReference Include="CUE4Parse" Version="1.0.4">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="CUE4Parse-Conversion" Version="1.0.4" />
+    <PackageReference Include="CUE4Parse-Conversion" Version="1.0.4">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="GenericReader" Version="1.0.3" />
     <PackageReference Include="MySqlConnector" Version="2.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
