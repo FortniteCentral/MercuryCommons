@@ -199,7 +199,7 @@ public class FortniteApiClient : IAsyncDisposable
             };
             var jobData = new JobDataMap(jobDataDictionary);
             var job = JobBuilder.Create<RefreshAccountJob>()
-                .WithIdentity($"RefreshAccountJob{DefaultClientToken.Environment}")
+                .WithIdentity($"RefreshAccountJob{DefaultClientToken.Environment}{DefaultClientToken.ClientId}")
                 .SetJobData(jobData)
                 .WithDescription("Job to refresh the current session.")
                 .Build();
