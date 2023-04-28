@@ -15,8 +15,8 @@ public class LauncherPublicService : BaseService
     public LauncherPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     // Uses default Label
-    public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items)
-        => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4);
+    public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items, AuthResponse auth = null)
+        => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4, auth: auth);
 
     /// <summary>
     /// Gets the manifest information for the specified game
@@ -30,8 +30,7 @@ public class LauncherPublicService : BaseService
     /// <returns>Manifest info</returns>
     public async Task<ManifestInfo> GetGameManifestAsync(string appId, string catalogId, string @namespace, string platform = "Windows", string label = "Live", AuthResponse auth = null)
     {
-        var authResponse = auth;
-        if (authResponse == null) authResponse = (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
+        var authResponse = auth ?? (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
         var request = new RestRequest($"/launcher/api/public/assets/v2/platform/{platform}/namespace/{@namespace}/catalogItem/{catalogId}/app/{appId}/label/{label}", Method.Post);
         if (@namespace == "fn" && platform == "Android" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
         var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
