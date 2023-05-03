@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using CUE4Parse.FileProvider;
 using CUE4Parse.FileProvider.Vfs;
 using CUE4Parse.UE4.IO;
 using CUE4Parse.UE4.IO.Objects;
@@ -55,6 +57,16 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
         foreach (var dir in _extraDirectories)
         {
             IterateFiles(dir, _searchOption);
+        }
+    }
+
+    public void InitializeRawFiles(DirectoryInfo info)
+    {
+        var availableFiles = IterateFiles(info, _searchOption);
+
+        foreach (var osFiles in availableFiles)
+        {
+            _files.AddFiles(osFiles);
         }
     }
 
@@ -190,15 +202,26 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
     /// </summary>
     /// <param name="directory">Directory to files</param>
     /// <param name="option">File search options</param>
-    private void IterateFiles(DirectoryInfo directory, SearchOption option)
+    private Dictionary<string, GameFile> IterateFiles(DirectoryInfo directory, SearchOption option)
     {
-        if (!directory.Exists) return;
+        if (!directory.Exists) return new Dictionary<string, GameFile>();
 
+        var osFiles = new Dictionary<string, GameFile>();
         foreach (var file in directory.EnumerateFiles("*.*", option))
         {
             var ext = file.Extension.SubstringAfter('.');
             if (!file.Exists || string.IsNullOrEmpty(ext)) continue;
-            RegisterFile(file);
+
+            if (!GameFile.Ue4KnownExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+                RegisterFile(file);
+            else
+            {
+                var osFile = new OsGameFile(_workingDirectory, file, "../../../", Versions);
+                if (IsCaseInsensitive) osFiles[osFile.Path.ToLowerInvariant()] = osFile;
+                else osFiles[osFile.Path] = osFile;
+            }
         }
+
+        return osFiles;
     }
 }
