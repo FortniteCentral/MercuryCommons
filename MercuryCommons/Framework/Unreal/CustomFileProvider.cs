@@ -62,12 +62,7 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
 
     public void InitializeRawFiles(DirectoryInfo info)
     {
-        var availableFiles = IterateFiles(info, _searchOption);
-
-        foreach (var osFiles in availableFiles)
-        {
-            _files.AddFiles(osFiles);
-        }
+        _files.AddFiles(IterateFiles(info, _searchOption));
     }
 
     /// <summary>
