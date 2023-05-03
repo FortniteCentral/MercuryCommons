@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -211,7 +211,7 @@ public abstract class CustomFileProvider : AbstractVfsFileProvider
                 RegisterFile(file);
             else
             {
-                var osFile = new OsGameFile(_workingDirectory, file, "../../../", Versions);
+                var osFile = new OsGameFile(directory, file, string.Empty, Versions);
                 if (IsCaseInsensitive) osFiles[osFile.Path.ToLowerInvariant()] = osFile;
                 else osFiles[osFile.Path] = osFile;
             }
