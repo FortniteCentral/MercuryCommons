@@ -9,7 +9,7 @@ using CUE4Parse.FileProvider.Vfs;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.Assets.Exports.Texture;
 using CUE4Parse.UE4.Objects.UObject;
-using CUE4Parse.UE4.Vfs;
+using CUE4Parse.UE4.VirtualFileSystem;
 using MercuryCommons.Framework.Unreal;
 using Newtonsoft.Json.Linq;
 using SkiaSharp;
