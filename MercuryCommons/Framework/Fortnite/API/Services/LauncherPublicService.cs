@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using EpicManifestParser.Objects;
 using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects.Auth;
-using MercuryCommons.Framework.Unreal.Manifests.Objects;
 using Newtonsoft.Json;
 using RestSharp;
 

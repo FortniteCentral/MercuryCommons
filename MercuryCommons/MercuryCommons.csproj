@@ -27,7 +27,6 @@
     <PackageReference Include="CUE4Parse-Conversion" Version="1.0.6-pre">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="GenericReader" Version="1.0.3" />
     <PackageReference Include="MySqlConnector" Version="2.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="RestSharp" Version="108.0.2-alpha.0.10" />
@@ -38,6 +37,10 @@
     <PackageReference Include="TimeZoneConverter" Version="6.0.1" />
     <PackageReference Include="Quartz" Version="3.5.0" />
     <PackageReference Include="Quartz.Jobs" Version="3.5.0" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\EpicManifestParser\src\EpicManifestParser\EpicManifestParser.csproj" />
   </ItemGroup>
 
 </Project>

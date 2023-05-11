@@ -12,7 +12,7 @@ public static class StringExtensions
         using var cryptoProvider = SHA1.Create();
         return BitConverter.ToString(cryptoProvider.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", string.Empty).ToLower();
     }
-    
+
     public static string GetSHA1Hash(this byte[] bytes)
     {
         using var cryptoProvider = SHA1.Create();
@@ -48,7 +48,7 @@ public static class StringExtensions
     {
         if (obj == null) throw new ArgumentException($"{name} can not be null.", name);
     }
-    
+
     public static string EncodeBase64(this string input) => Convert.ToBase64String(input.ToHexByteArray());
 
     public static string DecodeBase64(this string input)

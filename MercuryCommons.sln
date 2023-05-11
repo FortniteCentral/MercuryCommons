@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercuryCommons", "MercuryCommons\MercuryCommons.csproj", "{5B56705B-C254-4B04-9712-192E7A053E68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicManifestParser", "EpicManifestParser\src\EpicManifestParser\EpicManifestParser.csproj", "{83C32576-5DB3-4721-ABED-C85B7E60C5A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5B56705B-C254-4B04-9712-192E7A053E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B56705B-C254-4B04-9712-192E7A053E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B56705B-C254-4B04-9712-192E7A053E68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C32576-5DB3-4721-ABED-C85B7E60C5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C32576-5DB3-4721-ABED-C85B7E60C5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C32576-5DB3-4721-ABED-C85B7E60C5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C32576-5DB3-4721-ABED-C85B7E60C5A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
