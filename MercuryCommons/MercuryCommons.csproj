@@ -13,6 +13,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/FortniteCentral/MercuryCommons.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

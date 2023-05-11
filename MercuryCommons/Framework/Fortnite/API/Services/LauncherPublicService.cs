@@ -14,9 +14,11 @@ public class LauncherPublicService : BaseService
 
     public LauncherPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
-    // Uses default Label
-    public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items, AuthResponse auth = null)
-        => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4, auth: auth);
+    public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items, string label = "Live", AuthResponse auth = null)
+        => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4, label, auth);
+
+    public async Task<ContentBuildManifestInfo> GetManifestV1Async((string, string, string, string) items, string label = "Live", AuthResponse auth = null)
+        => await GetManifestV1Async(items.Item1, items.Item2, items.Item4, label, auth);
 
     /// <summary>
     /// Gets the manifest information for the specified game
@@ -35,6 +37,14 @@ public class LauncherPublicService : BaseService
         if (@namespace == "fn" && platform == "Android" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
         var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
         return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
+    }
+
+    public async Task<ContentBuildManifestInfo> GetManifestV1Async(string appId, string catalogId, string platform = "Windows", string label = "Live", AuthResponse auth = null)
+    {
+        var authResponse = auth ?? (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
+        var request = new RestRequest($"/launcher/api/public/assets/{platform}/{catalogId}/{appId}?label={label}");
+        var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
+        return response.IsSuccessful && response.Data != null ? new ContentBuildManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
     }
 
     /// <summary>
