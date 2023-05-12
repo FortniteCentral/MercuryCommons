@@ -70,7 +70,7 @@ public class MercuryWeb
         if (body != null) request.AddJsonBody(body);
         
         var response = await Client.ExecuteAsync<T>(request).ConfigureAwait(false);
-        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, response.ResponseUri?.OriginalString ?? "null");
+        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response.Data;
     }
 
@@ -115,7 +115,7 @@ public class MercuryWeb
         if (body != null) request.AddJsonBody(body);
         
         var response = await Client.ExecuteAsync(request).ConfigureAwait(false);
-        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, response.ResponseUri?.OriginalString ?? "null");
+        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response;
     }
 
