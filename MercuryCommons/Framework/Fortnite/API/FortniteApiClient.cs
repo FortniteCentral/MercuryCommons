@@ -404,10 +404,8 @@ public class FortniteApiClient : IAsyncDisposable
 
     internal RestClient CreateRestClient(BaseService service)
     {
-        var restClient = new RestClient(service.UrlToUse);
+        var restClient = new RestClient(new RestClientOptions(service.UrlToUse) { UserAgent = _userAgent }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
         _restClientAction?.Invoke(restClient);
-        restClient.UseSerializer<JsonNetSerializer>();
-        restClient.Options.UserAgent = _userAgent;
 
         return restClient;
     }

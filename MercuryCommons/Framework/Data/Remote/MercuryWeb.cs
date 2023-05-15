@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using RestSharp;
@@ -16,14 +15,11 @@ public class MercuryWeb
     /// <summary>
     /// Main web client for making requests through
     /// </summary>
-    private static readonly RestClient Client = new RestClient
+    private static readonly RestClient Client = new(new RestClientOptions
     {
-        Options =
-        {
-            UserAgent = $"Mercury/{Assembly.GetExecutingAssembly().GetName().Version}",
-            MaxTimeout = 3 * 1000
-        }
-    }.UseSerializer<JsonNetSerializer>();
+        UserAgent = $"Mercury/{Assembly.GetExecutingAssembly().GetName().Version}",
+        MaxTimeout = 3 * 1000
+    }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
 
     /// <summary>
     /// Execute request expecting a json response

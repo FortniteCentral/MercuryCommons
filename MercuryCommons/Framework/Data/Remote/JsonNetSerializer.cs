@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
 using RestSharp.Serializers;
@@ -22,9 +21,9 @@ public class JsonNetSerializer : IRestSerializer, ISerializer, IDeserializer
     public ISerializer Serializer => this;
     public IDeserializer Deserializer => this;
 
-    public string ContentType { get; set; } = "application/json";
-    public string[] AcceptedContentTypes => RestSharp.Serializers.ContentType.JsonAccept;
-    public SupportsContentType SupportsContentType => contentType => contentType.EndsWith("json", StringComparison.InvariantCultureIgnoreCase);
+    public ContentType ContentType { get; set; } = ContentType.Json;
+    public string[] AcceptedContentTypes => ContentType.JsonAccept;
+    public SupportsContentType SupportsContentType => contentType => contentType.Equals(ContentType.Json);
 
     public DataFormat DataFormat => DataFormat.Json;
 }
