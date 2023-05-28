@@ -16,6 +16,8 @@ public static class DateExtensions
     public static string DiscordFormattedUnixTimestamp(this DateTime date, string format) => $"<t:{ToUnixTimestamp(date)}:{format}>";
     public static string DiscordFormattedUnixTimestamp(this DateTime date, char format) => $"<t:{ToUnixTimestamp(date)}:{format}>";
 
+    public static DateTime ParseDateTimeUTC(this string date) => DateTime.TryParse(date, out var dateTime) ? dateTime.ToUniversalTime() : default;
+
     public static long ToUnixTimestamp(this DateTime target)
     {
         var date = new DateTime(1970, 1, 1, 0, 0, 0, target.Kind);
