@@ -79,7 +79,7 @@ public class MercuryWeb
     /// <param name="files">Files to include in the request</param>
     /// <param name="body">Json body to include in the request</param>
     /// <param name="method">HTTP method to use</param>
-    /// <returns>JSON model created from json</returns>
+    /// <returns>RestResponse of request</returns>
     public static async Task<RestResponse> ExecuteForResponse(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method);
