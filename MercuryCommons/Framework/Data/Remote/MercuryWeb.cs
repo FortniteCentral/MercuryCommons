@@ -64,7 +64,7 @@ public class MercuryWeb
         }
 
         if (body != null) request.AddJsonBody(body);
-        
+
         var response = await Client.ExecuteAsync<T>(request).ConfigureAwait(false);
         Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response.Data;
@@ -83,7 +83,7 @@ public class MercuryWeb
     public static async Task<RestResponse> ExecuteForResponse(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method);
-        
+
         if (parameters is { Count: > 0 })
         {
             foreach (var (key, value) in parameters)
@@ -109,8 +109,14 @@ public class MercuryWeb
         }
 
         if (body != null) request.AddJsonBody(body);
-        
-        var response = await Client.ExecuteAsync(request).ConfigureAwait(false);
+
+        return await ExecuteForResponse(request, Client);
+    }
+
+    public static async Task<RestResponse> ExecuteForResponse(MercuryRequest request, RestClient client = null)
+    {
+        client ??= Client;
+        var response = await client.ExecuteAsync(request).ConfigureAwait(false);
         Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response;
     }
@@ -137,7 +143,7 @@ public class MercuryWeb
         var request = new MercuryRequest(url);
         return await Client.DownloadStreamAsync(request);
     }
-    
+
     /// <summary>
     /// Get the raw bytes of a URL, such as an image or binary data.
     /// </summary>
@@ -146,10 +152,7 @@ public class MercuryWeb
     public static byte[] GetByteArray(string url)
     {
         var request = new MercuryRequest(url);
-        var data = Client.Execute(request);
-        byte[] retData = null;
-        if (data.IsSuccessful) retData = data.RawBytes;
-        return retData;
+        return GetByteArray(request);
     }
 
     /// <summary>
@@ -161,6 +164,19 @@ public class MercuryWeb
     {
         var request = new MercuryRequest(url);
         var data = await Client.ExecuteAsync(request);
+        byte[] retData = null;
+        if (data.IsSuccessful) retData = data.RawBytes;
+        return retData;
+    }
+
+    /// <summary>
+    /// Get the raw bytes of a request, such as an image or binary data.
+    /// </summary>
+    /// <param name="request">Created request class</param>
+    /// <returns>Data of site, null if not successful</returns>
+    public static byte[] GetByteArray(MercuryRequest request)
+    {
+        var data = Client.Execute(request);
         byte[] retData = null;
         if (data.IsSuccessful) retData = data.RawBytes;
         return retData;
