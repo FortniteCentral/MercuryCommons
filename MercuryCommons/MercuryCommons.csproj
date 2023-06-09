@@ -22,10 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CUE4Parse" Version="1.0.7">
+    <PackageReference Include="CUE4Parse" Version="1.0.8">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="CUE4Parse-Conversion" Version="1.0.7">
+    <PackageReference Include="CUE4Parse-Conversion" Version="1.0.8">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySqlConnector" Version="2.2.6" />
