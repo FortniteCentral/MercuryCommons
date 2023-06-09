@@ -4,7 +4,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>GMatrixGames</Authors>
     <Description>A common utility package for CUE4Parse and interfacing with Epic Games/Fortnite services.</Description>
     <Copyright>Copyright (c) 2022 GMatrixGames</Copyright>
