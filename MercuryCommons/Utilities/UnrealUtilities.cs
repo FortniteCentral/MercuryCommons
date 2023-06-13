@@ -50,8 +50,8 @@ public static class UnrealUtilities
     public static bool TryLoadObject<T>(string fullPath, out T export) where T : UObject => Provider.TryLoadObject(fullPath.Replace(".uasset", string.Empty), out export);
 
     public static SKBitmap GetBitmap(FSoftObjectPath? softObjectPath) => GetBitmap(softObjectPath?.AssetPathName.Text);
-    public static SKBitmap GetBitmap(string fullPath) => TryLoadObject(fullPath, out UTexture2D texture) ? GetBitmap(texture) : null;
-    public static SKBitmap GetBitmap(UTexture2D texture)
+    public static SKBitmap GetBitmap(string fullPath) => TryLoadObject(fullPath, out UTexture texture) ? GetBitmap(texture) : null;
+    public static SKBitmap GetBitmap(UTexture texture)
     {
         if (texture is null || texture.IsVirtual) return null;
         return texture.Decode();
@@ -61,7 +61,7 @@ public static class UnrealUtilities
         while (true)
         {
             if (!packageIndex.TryLoad(out var export) || export == null) return null;
-            if (export is UTexture2D texture) return GetBitmap(texture);
+            if (export is UTexture texture) return GetBitmap(texture);
         }
     }
 
