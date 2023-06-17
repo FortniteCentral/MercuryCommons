@@ -144,6 +144,12 @@ public class MercuryWeb
         return await Client.DownloadStreamAsync(request);
     }
 
+    public static Stream GetStream(string url)
+    {
+        var request = new MercuryRequest(url);
+        return Client.DownloadStream(request);
+    }
+
     /// <summary>
     /// Get the raw bytes of a URL, such as an image or binary data.
     /// </summary>
