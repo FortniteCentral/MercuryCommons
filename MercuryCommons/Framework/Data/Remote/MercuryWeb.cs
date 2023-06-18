@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -142,12 +142,6 @@ public class MercuryWeb
     {
         var request = new MercuryRequest(url);
         return await Client.DownloadStreamAsync(request);
-    }
-
-    public static Stream GetStream(string url)
-    {
-        var request = new MercuryRequest(url);
-        return Client.DownloadStream(request);
     }
 
     /// <summary>
