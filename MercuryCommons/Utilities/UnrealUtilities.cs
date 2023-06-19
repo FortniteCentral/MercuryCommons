@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -63,22 +62,5 @@ public static class UnrealUtilities
             if (!packageIndex.TryLoad(out var export) || export == null) return null;
             if (export is UTexture texture) return GetBitmap(texture);
         }
-    }
-
-    public static SKBitmap ResizeWithRatio(this SKBitmap me, double width, double height)
-    {
-        var ratioX = width / me.Width;
-        var ratioY = height / me.Height;
-        var ratio = ratioX < ratioY ? ratioX : ratioY;
-        return me.Resize(Convert.ToInt32(me.Width * ratio), Convert.ToInt32(me.Height * ratio));
-    }
-
-    public static SKBitmap Resize(this SKBitmap me, int size) => me.Resize(size, size);
-    public static SKBitmap Resize(this SKBitmap me, int width, int height)
-    {
-        var bmp = new SKBitmap(new SKImageInfo(width, height), SKBitmapAllocFlags.ZeroPixels);
-        using var pixmap = bmp.PeekPixels();
-        me.ScalePixels(pixmap, SKFilterQuality.Medium);
-        return bmp;
     }
 }
