@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
-using E = Newtonsoft.Json.JsonExtensionDataAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
 

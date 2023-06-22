@@ -141,6 +141,14 @@ public class FortniteApiClient : IAsyncDisposable
         set => _graphQlService = value;
     }
 
+    private DataAssetDirectoryService _dataAssetDirectoryService;
+
+    public DataAssetDirectoryService DataAssetDirectoryService
+    {
+        get => _dataAssetDirectoryService;
+        set => _dataAssetDirectoryService = value;
+    }
+
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -175,6 +183,7 @@ public class FortniteApiClient : IAsyncDisposable
         AccountPublicService = new AccountPublicService(this, defaultClientToken.Environment);
         ContentWebsite = new FortniteContentWebsite(this, defaultClientToken.Environment);
         GraphQlService = new GraphQLService(this, defaultClientToken.Environment);
+        DataAssetDirectoryService = new DataAssetDirectoryService(this, defaultClientToken.Environment);
     }
 
     /// <summary>
