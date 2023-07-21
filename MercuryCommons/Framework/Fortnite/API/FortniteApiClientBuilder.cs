@@ -127,10 +127,8 @@ public class FortniteApiClientBuilder
     public FortniteApiClient Create()
     {
         return new FortniteApiClient(
-            _authConfig,
-            _restClientAction,
-            _userAgent,
-            _clientToken ?? ClientToken.FortniteAndroidGameClient,
+            _authConfig, _restClientAction,
+            _userAgent, _clientToken ?? ClientToken.FortniteAndroidGameClient,
             _scheduler);
     }
 }

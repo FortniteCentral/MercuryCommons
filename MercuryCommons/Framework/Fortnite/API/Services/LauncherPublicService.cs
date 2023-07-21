@@ -34,7 +34,7 @@ public class LauncherPublicService : BaseService
     {
         var authResponse = auth ?? (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
         var request = new RestRequest($"/launcher/api/public/assets/v2/platform/{platform}/namespace/{@namespace}/catalogItem/{catalogId}/app/{appId}/label/{label}", Method.Post);
-        if (@namespace == "fn" && platform == "Android" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
+        if (@namespace == "fn" && platform is "Android" or "IOS" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
         var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
         return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
     }

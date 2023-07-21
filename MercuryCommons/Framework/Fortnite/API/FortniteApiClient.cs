@@ -411,6 +411,19 @@ public class FortniteApiClient : IAsyncDisposable
         return responseData;
     }
 
+    public async Task<AuthResponse> LoginAsClientCredentials(
+        ClientToken clientToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        var response = await AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, clientToken, cancellationToken).ConfigureAwait(false);
+        if (!response.IsSuccessful) throw new FortniteException("Somehow Epic failed to provide a client credentials response", response.Error);
+
+        var responseData = response.Data;
+        await OnLoginAsync(responseData);
+
+        return responseData;
+    }
+    
     internal RestClient CreateRestClient(BaseService service)
     {
         var restClient = new RestClient(new RestClientOptions(service.UrlToUse) { UserAgent = _userAgent }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
