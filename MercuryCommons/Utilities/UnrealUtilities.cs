@@ -9,7 +9,6 @@ using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.Assets.Exports.Texture;
 using CUE4Parse.UE4.Objects.UObject;
 using CUE4Parse.UE4.VirtualFileSystem;
-using MercuryCommons.Framework.Unreal;
 using Newtonsoft.Json.Linq;
 using SkiaSharp;
 
@@ -17,7 +16,7 @@ namespace MercuryCommons.Utilities;
 
 public static class UnrealUtilities
 {
-    public static CustomFileProvider Provider = null; // Must be initialized before usage
+    public static AbstractVfsFileProvider Provider = null; // Must be initialized before usage
 
     public static string GetVersion(dynamic buildString)
     {
