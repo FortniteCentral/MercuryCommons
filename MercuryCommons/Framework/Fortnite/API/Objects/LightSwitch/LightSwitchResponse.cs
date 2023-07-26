@@ -15,7 +15,7 @@ public class LightSwitchResponse
     [J] public bool Banned { get; set; }
     [J] public LauncherInfo LauncherInfoDto { get; set; }
     
-    public LightSwitchStatus StatusEnum => Enum.Parse<LightSwitchStatus>(Status);
+    public LightSwitchStatus StatusEnum => Enum.Parse<LightSwitchStatus>(Status, true);
 }
 
 public enum LightSwitchStatus
