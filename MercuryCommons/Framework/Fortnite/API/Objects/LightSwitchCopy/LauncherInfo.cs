@@ -1,6 +1,6 @@
 ﻿using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace MercuryCommons.Framework.Fortnite.API.Objects.Lightswitch;
+namespace MercuryCommons.Framework.Fortnite.API.Objects.LightSwitch;
 
 public class LauncherInfo
 {

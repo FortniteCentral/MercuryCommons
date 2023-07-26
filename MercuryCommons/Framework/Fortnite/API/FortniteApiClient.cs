@@ -61,19 +61,19 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _linksPublicService = value;
     }
 
-    private readonly LightswitchPublicService _lightswitchPublicService;
+    private readonly LightSwitchPublicService _lightSwitchPublicService;
 
     /// <summary>
     /// Contains all of the lightswitch endpoints.
     /// </summary>
-    public LightswitchPublicService LightswitchPublicService
+    public LightSwitchPublicService LightSwitchPublicService
     {
         get
         {
             VerifyLogin();
-            return _lightswitchPublicService;
+            return _lightSwitchPublicService;
         }
-        private init => _lightswitchPublicService = value;
+        private init => _lightSwitchPublicService = value;
     }
 
     private readonly FortnitePublicService _fortnitePublicService;
@@ -175,7 +175,7 @@ public class FortniteApiClient : IAsyncDisposable
         AuthConfig = authConfig;
         DefaultClientToken = defaultClientToken;
         LinksPublicService = new LinksPublicService(this, defaultClientToken.Environment);
-        LightswitchPublicService = new LightswitchPublicService(this, defaultClientToken.Environment);
+        LightSwitchPublicService = new LightSwitchPublicService(this, defaultClientToken.Environment);
         FortnitePublicService = new FortnitePublicService(this, defaultClientToken.Environment);
         CatalogPublicService = new CatalogPublicService(this, defaultClientToken.Environment);
         LauncherPublicService = new LauncherPublicService(this, defaultClientToken.Environment);
