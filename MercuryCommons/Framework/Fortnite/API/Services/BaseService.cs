@@ -83,7 +83,19 @@ public abstract class BaseService
                 fortniteResponse.Data = JsonConvert.DeserializeObject<T>(content, JsonNetSerializer.SerializerSettings);
                 break;
             case false:
-                fortniteResponse.Error = JsonConvert.DeserializeObject<EpicError>(content, JsonNetSerializer.SerializerSettings);
+                try
+                {
+                    fortniteResponse.Error = JsonConvert.DeserializeObject<EpicError>(content, JsonNetSerializer.SerializerSettings);
+                }
+                catch (JsonReaderException e)
+                {
+                    fortniteResponse.Error = new EpicError
+                    {
+                        ErrorMessage = e.ToString(),
+                        ErrorCode = $"{(int) response.StatusCode}",
+                        OriginatingService = "any"
+                    };
+                }
                 break;
         }
 
