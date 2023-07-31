@@ -53,7 +53,7 @@ public static class StreamExtensions
             }
         }
     }
-    
+
     public static async Task AsyncRead(this Stream stream, byte[] data, CancellationToken cancellationToken = default)
     {
         var ret = await stream.ReadAsync(data, cancellationToken);

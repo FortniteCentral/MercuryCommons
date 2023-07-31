@@ -1,4 +1,4 @@
-name: CI
+name: CI Release
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
         run: dotnet restore MercuryCommons
 
       - name: Build
-        run: dotnet build MercuryCommons
+        run: dotnet build MercuryCommons -c Release
 
       - name: Pack
         run: dotnet pack MercuryCommons/MercuryCommons.csproj -o "."

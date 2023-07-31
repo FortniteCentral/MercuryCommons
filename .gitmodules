@@ -1,0 +1,3 @@
+[submodule "EpicManifestParser"]
+	path = EpicManifestParser
+	url = git@github.com:FModel/EpicManifestParser.git

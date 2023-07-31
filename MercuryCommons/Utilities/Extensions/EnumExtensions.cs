@@ -9,9 +9,7 @@ public static class EnumExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T ToEnum<T>(this string value, T defaultValue)
     {
-        if (!Enum.TryParse(typeof(T), value, true, out var ret))
-            return defaultValue;
-
+        if (!Enum.TryParse(typeof(T), value, true, out var ret)) return defaultValue;
         return (T) ret;
     }
 

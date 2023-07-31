@@ -1,4 +1,4 @@
-name: CI
+name: CI Prerelease
 
 on:
   push:
@@ -29,14 +29,17 @@ jobs:
       - name: .NET 7 Setup
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
           include-prerelease: true
 
       - name: Restore dependencies
         run: dotnet restore MercuryCommons
 
       - name: Build
-        run: dotnet build MercuryCommons -c Release -o "."
+        run: dotnet build MercuryCommons -c Release
+
+      - name: Pack
+        run: dotnet pack MercuryCommons/MercuryCommons.csproj -o "."
 
       - name: Publish
         run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate

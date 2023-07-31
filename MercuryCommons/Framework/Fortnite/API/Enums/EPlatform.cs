@@ -33,5 +33,8 @@ public enum EPlatform
     [Description("Xbox Cloud Gaming")]
     Helios,
     [Description("Nintendo Switch")]
-    Switch
+    Switch,
+    
+    [Description("UEFN")]
+    UEFN
 }

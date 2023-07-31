@@ -1,1 +1,0 @@
-# This code is a modified version of EpicManifestParser from Officer available [here](https://github.com/NotOfficer/EpicManifestParser)

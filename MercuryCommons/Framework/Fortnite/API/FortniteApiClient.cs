@@ -61,19 +61,19 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _linksPublicService = value;
     }
 
-    private readonly LightswitchPublicService _lightswitchPublicService;
+    private readonly LightSwitchPublicService _lightSwitchPublicService;
 
     /// <summary>
     /// Contains all of the lightswitch endpoints.
     /// </summary>
-    public LightswitchPublicService LightswitchPublicService
+    public LightSwitchPublicService LightSwitchPublicService
     {
         get
         {
             VerifyLogin();
-            return _lightswitchPublicService;
+            return _lightSwitchPublicService;
         }
-        private init => _lightswitchPublicService = value;
+        private init => _lightSwitchPublicService = value;
     }
 
     private readonly FortnitePublicService _fortnitePublicService;
@@ -141,6 +141,14 @@ public class FortniteApiClient : IAsyncDisposable
         set => _graphQlService = value;
     }
 
+    private DataAssetDirectoryService _dataAssetDirectoryService;
+
+    public DataAssetDirectoryService DataAssetDirectoryService
+    {
+        get => _dataAssetDirectoryService;
+        set => _dataAssetDirectoryService = value;
+    }
+
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -167,7 +175,7 @@ public class FortniteApiClient : IAsyncDisposable
         AuthConfig = authConfig;
         DefaultClientToken = defaultClientToken;
         LinksPublicService = new LinksPublicService(this, defaultClientToken.Environment);
-        LightswitchPublicService = new LightswitchPublicService(this, defaultClientToken.Environment);
+        LightSwitchPublicService = new LightSwitchPublicService(this, defaultClientToken.Environment);
         FortnitePublicService = new FortnitePublicService(this, defaultClientToken.Environment);
         CatalogPublicService = new CatalogPublicService(this, defaultClientToken.Environment);
         LauncherPublicService = new LauncherPublicService(this, defaultClientToken.Environment);
@@ -175,6 +183,7 @@ public class FortniteApiClient : IAsyncDisposable
         AccountPublicService = new AccountPublicService(this, defaultClientToken.Environment);
         ContentWebsite = new FortniteContentWebsite(this, defaultClientToken.Environment);
         GraphQlService = new GraphQLService(this, defaultClientToken.Environment);
+        DataAssetDirectoryService = new DataAssetDirectoryService(this, defaultClientToken.Environment);
     }
 
     /// <summary>
@@ -199,7 +208,7 @@ public class FortniteApiClient : IAsyncDisposable
             };
             var jobData = new JobDataMap(jobDataDictionary);
             var job = JobBuilder.Create<RefreshAccountJob>()
-                .WithIdentity($"RefreshAccountJob{DefaultClientToken.Environment}")
+                .WithIdentity($"RefreshAccountJob{DefaultClientToken.Environment}{DefaultClientToken.ClientId}")
                 .SetJobData(jobData)
                 .WithDescription("Job to refresh the current session.")
                 .Build();
@@ -402,12 +411,23 @@ public class FortniteApiClient : IAsyncDisposable
         return responseData;
     }
 
+    public async Task<AuthResponse> LoginAsClientCredentials(
+        ClientToken clientToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        var response = await AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, clientToken, cancellationToken).ConfigureAwait(false);
+        if (!response.IsSuccessful) throw new FortniteException("Somehow Epic failed to provide a client credentials response", response.Error);
+
+        var responseData = response.Data;
+        await OnLoginAsync(responseData);
+
+        return responseData;
+    }
+    
     internal RestClient CreateRestClient(BaseService service)
     {
-        var restClient = new RestClient(service.UrlToUse);
+        var restClient = new RestClient(new RestClientOptions(service.UrlToUse) { UserAgent = _userAgent }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
         _restClientAction?.Invoke(restClient);
-        restClient.UseSerializer<JsonNetSerializer>();
-        restClient.Options.UserAgent = _userAgent;
 
         return restClient;
     }
