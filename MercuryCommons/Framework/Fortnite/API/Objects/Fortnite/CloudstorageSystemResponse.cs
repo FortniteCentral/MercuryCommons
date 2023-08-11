@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
 

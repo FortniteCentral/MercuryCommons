@@ -20,7 +20,7 @@ public static class EnumerableExtensions
     {
         foreach (var t in items)
         {
-            if (!set.Contains(t)) set.Add(t);
+            set.Add(t);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.DataAssetDirectory;
 

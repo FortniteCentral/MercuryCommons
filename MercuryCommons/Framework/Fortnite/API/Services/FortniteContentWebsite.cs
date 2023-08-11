@@ -7,12 +7,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class FortniteContentWebsite : BaseService
+public class FortniteContentWebsite(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
     public override string BaseUrl => "https://fortnitecontent-website-prod07.ol.epicgames.com";
     public override string StageUrl => "https://fortnitecontent-website-prod07.ol.epicgames.com";
-
-    internal FortniteContentWebsite(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<ContentResponse>> GetContentWebsiteAsync(string lang = "en")
     {

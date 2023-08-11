@@ -7,12 +7,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class LightSwitchPublicService : BaseService
+public class LightSwitchPublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
     public override string BaseUrl => "https://lightswitch-public-service-prod06.ol.epicgames.com";
     public override string StageUrl => "https://lightswitch-public-service-stage.ol.epicgames.com";
-
-    internal LightSwitchPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<LightSwitchResponse>> GetStatusAsync(string service)
     {

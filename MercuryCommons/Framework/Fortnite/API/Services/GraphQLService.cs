@@ -8,12 +8,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class GraphQLService : BaseService
+public class GraphQLService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
     public override string BaseUrl => "https://www.epicgames.com/graphql";
     public override string StageUrl => "https://www.epicgames.com/graphql";
-
-    internal GraphQLService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<GQLCatalogRelatedResponse> GetRelatedOfferIds(string nmspc, string[] countries, string country = "NZ", string locale = "en-US", bool codeRedemptionOnly = false, string category = "addons|digitalextras")
     {

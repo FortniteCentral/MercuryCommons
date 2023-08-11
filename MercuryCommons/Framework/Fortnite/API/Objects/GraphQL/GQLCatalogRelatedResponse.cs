@@ -1,5 +1,4 @@
 ﻿using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.GraphQL;
 

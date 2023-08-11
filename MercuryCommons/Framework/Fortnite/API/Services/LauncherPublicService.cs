@@ -7,12 +7,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class LauncherPublicService : BaseService
+public class LauncherPublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
     public override string BaseUrl => "https://launcher-public-service-prod06.ol.epicgames.com";
     public override string StageUrl => "https://launcher-public-service-stage.ol.epicgames.com";
-
-    public LauncherPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items, string label = "Live", AuthResponse auth = null)
         => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4, label, auth);

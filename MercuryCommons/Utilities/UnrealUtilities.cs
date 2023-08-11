@@ -28,9 +28,9 @@ public static class UnrealUtilities
             _ => string.Empty
         };
 
-        var buildMatch = Regex.Match(usedVersion, @"Fortnite\+Release\-([0-9]+\.[0-9]+)\-");
+        var buildMatch = Regex.Match(usedVersion, @"Fortnite\+Release-([0-9]+\.[0-9]+)-");
         if (buildMatch.Success) return $"{float.Parse(buildMatch.Groups[1].Value):0.00}";
-        buildMatch = Regex.Match(usedVersion, @"Fortnite\+Release\-([0-9]+\.[0-9]+\.[0-9]+)\-");
+        buildMatch = Regex.Match(usedVersion, @"Fortnite\+Release-([0-9]+\.[0-9]+\.[0-9]+)-");
         return buildMatch.Success ? buildMatch.Groups[1].Value : string.Empty;
     }
 

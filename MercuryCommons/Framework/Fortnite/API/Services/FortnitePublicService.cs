@@ -7,12 +7,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class FortnitePublicService : BaseService
+public class FortnitePublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
-    public override string BaseUrl => "https://fortnite-public-service-prod11.ol.epicgames.com";
-    public override string StageUrl => "https://fortnite-public-service-stage.ol.epicgames.com";
-
-    internal FortnitePublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
+    public override string BaseUrl => "https://fngw-mcp-gc-livefn.ol.epicgames.com";
+    public override string StageUrl => "https://fngw-mcp-gc-stage.ol.epicgames.com";
 
     public async Task<FortniteResponse<CloudstorageSystemResponse[]>> GetCloudstorageSystemAsync()
     {

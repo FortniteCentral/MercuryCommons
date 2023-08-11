@@ -32,9 +32,13 @@ public enum EPlatform
     HeliosMobile,
     [Description("Xbox Cloud Gaming")]
     Helios,
+    [Description("Amazon Luna")]
+    Luna,
+    [Description("Amazon Luna (Mobile)")]
+    LunaMobile,
     [Description("Nintendo Switch")]
     Switch,
-    
+
     [Description("UEFN")]
     UEFN
 }

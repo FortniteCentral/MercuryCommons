@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.LightSwitch;
 

@@ -1,7 +1,4 @@
 ﻿using System;
-using MercuryCommons.Framework.Fortnite.API.Objects.Catalog;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
-using I = Newtonsoft.Json.JsonIgnoreAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
 

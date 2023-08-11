@@ -1,5 +1,4 @@
 ﻿using System;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Discovery;
 

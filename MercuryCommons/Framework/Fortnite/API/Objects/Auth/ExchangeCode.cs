@@ -1,6 +1,4 @@
-﻿using J = Newtonsoft.Json.JsonPropertyAttribute;
-
-namespace MercuryCommons.Framework.Fortnite.API.Objects.Auth;
+﻿namespace MercuryCommons.Framework.Fortnite.API.Objects.Auth;
 
 public class ExchangeCode
 {

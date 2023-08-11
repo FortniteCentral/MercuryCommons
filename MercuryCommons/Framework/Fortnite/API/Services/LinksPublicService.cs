@@ -6,12 +6,10 @@ using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
 
-public class LinksPublicService : BaseService
+public class LinksPublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
     public override string BaseUrl => "https://links-public-service-live.ol.epicgames.com";
     public override string StageUrl => "https://links-public-service-stage.ol.epicgames.com";
-
-    internal LinksPublicService(FortniteApiClient client, EEnvironment environment) : base(client, environment) { }
 
     public async Task<FortniteResponse<MnemonicResponse>> GetMnemonicAsync(
         string mnemonic,

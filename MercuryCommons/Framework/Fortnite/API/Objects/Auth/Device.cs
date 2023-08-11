@@ -2,25 +2,17 @@
 using System.Threading.Tasks;
 using MercuryCommons.Framework.Fortnite.API.Exceptions;
 using Newtonsoft.Json;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace MercuryCommons.Framework.Fortnite.API.Objects.Auth;
 
-public class Device
+public class Device(string deviceId, string accountId, string secret)
 {
-    [J] public string DeviceId { get; set; }
-    [J] public string AccountId { get; set; }
-    [J] public string Secret { get; set; }
+    [J] public string DeviceId { get; set; } = deviceId;
+    [J] public string AccountId { get; set; } = accountId;
+    [J] public string Secret { get; set; } = secret;
     [J] public string UserAgent { get; set; }
     [J] public DeviceLocation Created { get; set; }
     [J] public DeviceLocation LastAccess { get; set; }
-
-    public Device(string deviceId, string accountId, string secret)
-    {
-        DeviceId = deviceId;
-        AccountId = accountId;
-        Secret = secret;
-    }
 
     public async Task SaveToFileAsync(string path, bool deleteIfExists = true)
     {

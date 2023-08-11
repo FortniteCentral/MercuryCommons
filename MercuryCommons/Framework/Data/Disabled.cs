@@ -3,4 +3,4 @@
 namespace MercuryCommons.Framework.Data;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-public class Disabled : Attribute { }
+public class Disabled : Attribute;
