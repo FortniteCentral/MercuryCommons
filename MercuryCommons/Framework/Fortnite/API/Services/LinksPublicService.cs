@@ -8,7 +8,7 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 
 public class LinksPublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
-    public override string BaseUrl => "https://links-public-service-live.ol.epicgames.com";
+    public override string BaseUrl => "https://links-public-service-prod.ol.epicgames.com";
     public override string StageUrl => "https://links-public-service-stage.ol.epicgames.com";
 
     public async Task<FortniteResponse<MnemonicResponse>> GetMnemonicAsync(
