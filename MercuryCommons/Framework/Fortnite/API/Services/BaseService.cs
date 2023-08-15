@@ -51,13 +51,14 @@ public abstract class BaseService
         CancellationToken token = default)
         => await ExecuteAsync<object>(request, withAuth, false, token: token).ConfigureAwait(false);
 
-    internal virtual async Task<FortniteResponse<T>> ExecuteAsync<T>(
+    public virtual async Task<FortniteResponse<T>> ExecuteAsync<T>(
         RestRequest request,
         bool withAuth = false,
         bool withData = true,
         string accessToken = null,
         bool requiresLogin = true,
-        CancellationToken token = default)
+        CancellationToken token = default,
+        RestClient client = null)
     {
         if (requiresLogin)
         {
@@ -70,7 +71,8 @@ public abstract class BaseService
 
         if (withAuth) request.AddHeader("Authorization", $"bearer {accessToken ?? Client.CurrentLogin.AccessToken}");
 
-        var response = await RestClient.ExecuteAsync(request, token).ConfigureAwait(false);
+        client ??= RestClient;
+        var response = await client.ExecuteAsync(request, token).ConfigureAwait(false);
         var content = response.Content ?? "{}";
         var fortniteResponse = new FortniteResponse<T>
         {
