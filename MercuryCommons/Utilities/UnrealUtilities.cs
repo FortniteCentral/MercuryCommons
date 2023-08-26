@@ -49,11 +49,7 @@ public static class UnrealUtilities
 
     public static SKBitmap GetBitmap(FSoftObjectPath? softObjectPath) => GetBitmap(softObjectPath?.AssetPathName.Text);
     public static SKBitmap GetBitmap(string fullPath) => TryLoadObject(fullPath, out UTexture texture) ? GetBitmap(texture) : null;
-    public static SKBitmap GetBitmap(UTexture texture)
-    {
-        if (texture is null || texture.IsVirtual) return null;
-        return texture.Decode();
-    }
+    public static SKBitmap GetBitmap(UTexture texture) => texture?.Decode();
     public static SKBitmap GetBitmap(FPackageIndex packageIndex)
     {
         while (true)
