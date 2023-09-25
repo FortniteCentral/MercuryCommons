@@ -38,7 +38,29 @@ public class FortniteContentWebsite(FortniteApiClient client, EEnvironment envir
         var response = data.Data["tournament_info"]?["tournaments"]?.ToObject<FortTournament[]>();
         return new FortniteResponse<FortTournament[]>
         {
-            Data = response,
+            Data = response
+        };
+    }
+
+    public async Task<FortniteResponse<FortMPItemShopSection[]>> GetContentMPShopSectionsAsync(string lang = "en")
+    {
+        var request = new RestRequest("/content/api/pages/fortnite-game/mp-item-shop");
+        request.AddParameter("lang", lang);
+        var data = await ExecuteAsync<JObject>(request);
+        if (!data.IsSuccessful)
+        {
+            return new FortniteResponse<FortMPItemShopSection[]>
+            {
+                Data = null,
+                Error = data.Error,
+                HttpStatusCode = data.HttpStatusCode
+            };
+        }
+
+        var response = data.Data["shopData"]?["sections"]?.ToObject<FortMPItemShopSection[]>();
+        return new FortniteResponse<FortMPItemShopSection[]>
+        {
+            Data = response
         };
     }
 }

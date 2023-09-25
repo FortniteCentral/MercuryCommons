@@ -35,6 +35,7 @@ public class ContentResponse
     [J] public FortSubscription Subscription { get; set; }
     [J] public FortEmergencyNoticeV2 EmergencyNoticeV2 { get; set; }
     [J] public FortShopCarousel ShopCarousel { get; set; }
+    [J] public FortMPItemShop MPItemShop { get; set; }
 }
 
 public class FortSubGameInfo
@@ -533,4 +534,34 @@ public class FortLoginMessage
     [J("_activeDate")] public DateTime ActiveDate { get; set; }
     [J] public DateTime LastModified { get; set; }
     [J("_locale")] public string Locale { get; set; }
+}
+
+public class FortMPItemShop
+{
+    [J] public FortMPShopData ShopData { get; set; }
+    [J("_title")] public string Title { get; set; }
+    [J] public FortOverrideableMessage LoginMessage { get; set; }
+    [J("_activeDate")] public DateTime ActiveDate { get; set; }
+    [J] public DateTime LastModified { get; set; }
+    [J("_locale")] public string Locale { get; set; }
+}
+
+public class FortMPShopData
+{
+    [J("_type")] public string Type { get; set; }
+    [J] public FortMPItemShopSection[] Sections { get; set; }
+}
+
+public class FortMPItemShopSection
+{
+    [J] public string DisplayName { get; set; }
+    [J("_type")] public string Type { get; set; }
+    [J] public string SectionId { get; set; }
+    [J] public FortMPMetadata Metadata { get; set; }
+}
+
+public class FortMPMetadata
+{
+    [J] public string ShowIneligibleOffers { get; set; }
+    [J] public FortMPItemShopSection[] Subsections { get; set; }
 }

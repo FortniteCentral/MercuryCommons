@@ -145,7 +145,11 @@ public class FortniteApiClient : IAsyncDisposable
 
     public DataAssetDirectoryService DataAssetDirectoryService
     {
-        get => _dataAssetDirectoryService;
+        get
+        {
+            VerifyLogin();
+            return _dataAssetDirectoryService;
+        }
         set => _dataAssetDirectoryService = value;
     }
 
