@@ -562,6 +562,33 @@ public class FortMPItemShopSection
 
 public class FortMPMetadata
 {
+    [J] public object[] OfferGroups { get; set; } // Only need length
     [J] public string ShowIneligibleOffers { get; set; }
-    [J] public FortMPItemShopSection[] Subsections { get; set; }
+    [J] public FortMPBackground Background { get; set; }
+    [J] public FortMPStackRank[] StackRanks { get; set; }
+    [J] public FortMPItemShopSubsection[] Subsections { get; set; }
+}
+
+public class FortMPStackRank
+{
+    [J] public DateTime StartDate { get; set; }
+}
+
+public class FortMPItemShopSubsection
+{
+    [J] public string DisplayName { get; set; }
+    [J("_type")] public string Type { get; set; }
+    [J] public string SectionId { get; set; }
+    [J] public FortMPSubsectionMetadata Metadata { get; set; }
+}
+
+public class FortMPSubsectionMetadata
+{
+    [J] public object[] OfferGroups { get; set; } // Only need length
+    [J] public string ShowIneligibleOffers { get; set; }
+}
+
+public class FortMPBackground
+{
+    [J] public string CookedAssetKey { get; set; }
 }
