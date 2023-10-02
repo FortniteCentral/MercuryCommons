@@ -24,15 +24,8 @@ Contribution guidelines will be coming soon.
 
 ## Installation
 
-Add the NuGet package to your project:
-```shell
-dotnet add package MercuryCommons
-```
-Alternatively, you can clone the repository and include it in your project as a [reference](https://learn.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-items?view=vs-2022#projectreference):
-```shell
-git clone https://github.com/FortniteCentral/MercuryCommons.git --recursive
-```
-
+Coming soon.
+    
 ## Support me
 I work hard to help create things to help others achieve their goals. If you wish to help me keep creating things, feel free to donate!
 
