@@ -572,6 +572,8 @@ public class FortMPMetadata
 public class FortMPStackRank
 {
     [J] public DateTime StartDate { get; set; }
+
+    [I] public DateTime ActualStartDate => StartDate - TimeSpan.FromDays(1);
 }
 
 public class FortMPItemShopSubsection
