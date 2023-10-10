@@ -593,4 +593,5 @@ public class FortMPSubsectionMetadata
 public class FortMPBackground
 {
     [J] public string CookedAssetKey { get; set; }
+    [J] public string CustomTexture { get; set; }
 }
