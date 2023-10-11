@@ -46,11 +46,10 @@ public class FortniteApiClient : IAsyncDisposable
     /// </summary>
     public bool IsLoggedIn { get; set; }
 
-    private readonly LinksPublicService _linksPublicService;
-
     /// <summary>
     /// Contains some of the links endpoints.
     /// </summary>
+    private readonly LinksPublicService _linksPublicService;
     public LinksPublicService LinksPublicService
     {
         get
@@ -61,11 +60,10 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _linksPublicService = value;
     }
 
-    private readonly LightSwitchPublicService _lightSwitchPublicService;
-
     /// <summary>
     /// Contains all of the lightswitch endpoints.
     /// </summary>
+    private readonly LightSwitchPublicService _lightSwitchPublicService;
     public LightSwitchPublicService LightSwitchPublicService
     {
         get
@@ -76,11 +74,10 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _lightSwitchPublicService = value;
     }
 
-    private readonly FortnitePublicService _fortnitePublicService;
-
     /// <summary>
     /// Contains most/all of the main fortnite endpoints.
     /// </summary>
+    private readonly FortnitePublicService _fortnitePublicService;
     public FortnitePublicService FortnitePublicService
     {
         get
@@ -91,11 +88,10 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _fortnitePublicService = value;
     }
 
-    private readonly CatalogPublicService _catalogPublicService;
-
     /// <summary>
     /// Contains most/all of the catalog endpoints.
     /// </summary>
+    private readonly CatalogPublicService _catalogPublicService;
     public CatalogPublicService CatalogPublicService
     {
         get
@@ -106,11 +102,10 @@ public class FortniteApiClient : IAsyncDisposable
         private init => _catalogPublicService = value;
     }
 
-    private readonly LauncherPublicService _launcherPublicService;
-
     /// <summary>
     /// Contains most/all of the launcher endpoints.
     /// </summary>
+    private readonly LauncherPublicService _launcherPublicService;
     public LauncherPublicService LauncherPublicService
     {
         get
@@ -122,7 +117,6 @@ public class FortniteApiClient : IAsyncDisposable
     }
 
     private DiscoveryService _discoveryService;
-
     public DiscoveryService DiscoveryService
     {
         get
@@ -134,7 +128,6 @@ public class FortniteApiClient : IAsyncDisposable
     }
 
     private GraphQLService _graphQlService;
-
     public GraphQLService GraphQlService
     {
         get => _graphQlService;
@@ -142,7 +135,6 @@ public class FortniteApiClient : IAsyncDisposable
     }
 
     private DataAssetDirectoryService _dataAssetDirectoryService;
-
     public DataAssetDirectoryService DataAssetDirectoryService
     {
         get
@@ -153,6 +145,18 @@ public class FortniteApiClient : IAsyncDisposable
         set => _dataAssetDirectoryService = value;
     }
 
+    private EventsPublicService _eventsPublicService;
+
+    public EventsPublicService EventsPublicService
+    {
+        get
+        {
+            VerifyLogin();
+            return _eventsPublicService;
+        }
+        set => _eventsPublicService = value;
+    }
+    
     /// <summary>
     /// Contains most/all of the account endpoints.
     /// </summary>
@@ -188,6 +192,7 @@ public class FortniteApiClient : IAsyncDisposable
         ContentWebsite = new FortniteContentWebsite(this, defaultClientToken.Environment);
         GraphQlService = new GraphQLService(this, defaultClientToken.Environment);
         DataAssetDirectoryService = new DataAssetDirectoryService(this, defaultClientToken.Environment);
+        EventsPublicService = new EventsPublicService(this, defaultClientToken.Environment);
     }
 
     /// <summary>
@@ -427,7 +432,7 @@ public class FortniteApiClient : IAsyncDisposable
 
         return responseData;
     }
-    
+
     internal RestClient CreateRestClient(BaseService service)
     {
         var restClient = new RestClient(new RestClientOptions(service.UrlToUse) { UserAgent = _userAgent }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
