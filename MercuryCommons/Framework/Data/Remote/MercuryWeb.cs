@@ -30,9 +30,10 @@ public class MercuryWeb
     /// <param name="files">Files to include in the request</param>
     /// <param name="body">Json body to include in the request</param>
     /// <param name="method">HTTP method to use</param>
+    /// <param name="silent">Should it log the url, status, and method</param>
     /// <typeparam name="T">JSON model to use in return value</typeparam>
     /// <returns>JSON model created from json</returns>
-    public static async Task<T> Execute<T>(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
+    public static async Task<T> Execute<T>(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get, bool silent = false)
     {
         var request = new MercuryRequest(url, method)
         {
@@ -72,7 +73,7 @@ public class MercuryWeb
 
         var response = await Client.ExecuteAsync<T>(request).ConfigureAwait(false);
         Client.DefaultParameters.RemoveParameter("user-agent", ParameterType.HttpHeader);
-        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
+        if (!silent) Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response.Data;
     }
 
@@ -85,8 +86,9 @@ public class MercuryWeb
     /// <param name="files">Files to include in the request</param>
     /// <param name="body">Json body to include in the request</param>
     /// <param name="method">HTTP method to use</param>
+    /// <param name="silent">Should it log the url, status, and method</param>
     /// <returns>RestResponse of request</returns>
-    public static async Task<RestResponse> ExecuteForResponse(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
+    public static async Task<RestResponse> ExecuteForResponse(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get, bool silent = false)
     {
         var request = new MercuryRequest(url, method);
 
@@ -121,15 +123,15 @@ public class MercuryWeb
 
         if (body != null) request.AddJsonBody(body);
 
-        return await ExecuteForResponse(request, Client);
+        return await ExecuteForResponse(request, Client, silent);
     }
 
-    public static async Task<RestResponse> ExecuteForResponse(MercuryRequest request, RestClient client = null)
+    public static async Task<RestResponse> ExecuteForResponse(MercuryRequest request, RestClient client = null, bool silent = false)
     {
         client ??= Client;
         var response = await client.ExecuteAsync(request).ConfigureAwait(false);
         Client.DefaultParameters.RemoveParameter("user-agent", ParameterType.HttpHeader);
-        Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
+        if (!silent) Log.Information("[{Method}] [{Status}({StatusCode})] '{Resource}'", request.Method, response.StatusDescription ?? "null", (int) response.StatusCode, request.Resource);
         return response;
     }
 
