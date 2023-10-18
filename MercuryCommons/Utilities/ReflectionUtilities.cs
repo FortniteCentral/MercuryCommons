@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MercuryCommons.Utilities;
 
 public static class ReflectionUtilities
 {
-    public static IList<T> GetSubclassesOfType<T>() where T : class => GetSubclassesOfType<T>(typeof(T));
-    public static IList<T> GetSubclassesOfType<T>(Func<Type, bool> func) where T : class => GetSubclassesOfType<T>(typeof(T), func);
-    public static IList<T> GetSubclassesOfType<T>(Type type, Func<Type, bool> func = null) where T : class
+    public static IList<T> GetSubclassesOfType<T>(IServiceProvider provider = null) where T : class => GetSubclassesOfType<T>(typeof(T), null, provider);
+    public static IList<T> GetSubclassesOfType<T>(Func<Type, bool> func, IServiceProvider provider = null) where T : class => GetSubclassesOfType<T>(typeof(T), func, provider);
+    public static IList<T> GetSubclassesOfType<T>(Type type, Func<Type, bool> func = null, IServiceProvider provider = null) where T : class
     {
         var ret = new List<T>();
         var types = type.Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(T)));
@@ -16,7 +17,7 @@ public static class ReflectionUtilities
 
         foreach (var t in types)
         {
-            var inst = Activator.CreateInstance(t);
+            var inst = provider != null ? ActivatorUtilities.CreateInstance<T>(provider) : Activator.CreateInstance(t);
             if (inst is T retT) ret.Add(retT);
         }
 

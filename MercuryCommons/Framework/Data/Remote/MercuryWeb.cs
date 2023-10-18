@@ -32,7 +32,7 @@ public class MercuryWeb
     /// <param name="method">HTTP method to use</param>
     /// <typeparam name="T">JSON model to use in return value</typeparam>
     /// <returns>JSON model created from json</returns>
-    public static async Task<T> Execute<T>(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
+    public static async Task<T> Execute<T>(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method)
         {
@@ -86,7 +86,7 @@ public class MercuryWeb
     /// <param name="body">Json body to include in the request</param>
     /// <param name="method">HTTP method to use</param>
     /// <returns>RestResponse of request</returns>
-    public static async Task<RestResponse> ExecuteForResponse(string url, Dictionary<string, object> parameters = null, Dictionary<string, object> headers = null, Dictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
+    public static async Task<RestResponse> ExecuteForResponse(string url, IDictionary<string, object> parameters = null, IDictionary<string, object> headers = null, IDictionary<string, byte[]> files = null, object body = null, Method method = Method.Get)
     {
         var request = new MercuryRequest(url, method);
 
