@@ -17,7 +17,7 @@ public static class ReflectionUtilities
 
         foreach (var t in types)
         {
-            var inst = provider != null ? ActivatorUtilities.CreateInstance<T>(provider) : Activator.CreateInstance(t);
+            var inst = provider != null ? ActivatorUtilities.CreateInstance(provider, t) : Activator.CreateInstance(t);
             if (inst is T retT) ret.Add(retT);
         }
 
