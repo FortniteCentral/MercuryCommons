@@ -12,7 +12,7 @@ public static class ReflectionUtilities
     public static IList<T> GetSubclassesOfType<T>(Type type, Func<Type, bool> func = null, IServiceProvider provider = null) where T : class
     {
         var ret = new List<T>();
-        var types = type.Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(T)));
+        var types = type.Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(T)) && !t.IsAbstract);
         if (func != null) types = types.Where(func);
 
         foreach (var t in types)
