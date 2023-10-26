@@ -34,12 +34,16 @@ public static class UnrealUtilities
         return buildMatch.Success ? buildMatch.Groups[1].Value : string.Empty;
     }
 
-    public static IList<string> GetPartialKeys(this IAesVfsReader provider, string partialKey) =>
+    public static List<string> GetPartialKeys(this IAesVfsReader provider, string partialKey) =>
         provider.Files.Values.GetMatchFromGameFile(partialKey) is { Count: > 0 } files ? files : new List<string>();
-    public static IList<string> GetPartialKeys(this IVfsFileProvider provider, string partialKey) =>
+    public static List<string> GetPartialKeys(this IVfsFileProvider provider, string partialKey) =>
         provider.Files.Values.GetMatchFromGameFile(partialKey) is { Count: > 0 } files ? files : new List<string>();
-    public static IList<string> GetMatchFromGameFile(this IEnumerable<GameFile> enumerable, string pattern)
+    public static List<string> GetMatchFromGameFile(this IEnumerable<GameFile> enumerable, string pattern)
         => (from file in enumerable where Regex.IsMatch(file.Path, pattern, RegexOptions.IgnoreCase) select file.Path).ToList();
+    public static List<string> GetPartialKeys(this IVfsFileProvider provider, Regex regex) =>
+        provider.Files.Values.GetMatchFromGameFile(regex) is { Count: > 0 } files ? files : new List<string>();
+    public static List<string> GetMatchFromGameFile(this IEnumerable<GameFile> enumerable, Regex regex)
+        => (from file in enumerable where regex.IsMatch(file.Path) select file.Path).ToList();
 
     public static string GetPakNumber(this IAesVfsReader provider) => Regex.Match(provider.Name, @"\d+").Value;
     public static IList<string> ExportsToName(this IEnumerable<UObject> exports) => exports.Select(export => export.ExportType).ToList();
