@@ -15,6 +15,8 @@ public interface IMongoRepository<TDocument> where TDocument : IDocument
     IEnumerable<TProjected> FilterBy<TProjected>(FilterDefinition<TDocument> filterExpression, ProjectionDefinition<TDocument, TProjected> projectionExpression);
     TDocument FindOne(FilterDefinition<TDocument> filterExpression);
     Task<TDocument> FindOneAsync(FilterDefinition<TDocument> filterExpression);
+    TDocument FindById(ObjectId id);
+    Task<TDocument> FindByIdAsync(ObjectId id);
     TDocument FindById(string id);
     Task<TDocument> FindByIdAsync(string id);
     void InsertOne(TDocument document);
