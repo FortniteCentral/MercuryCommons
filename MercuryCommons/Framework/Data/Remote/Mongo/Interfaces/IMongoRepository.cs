@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 
 namespace MercuryCommons.Framework.Data.Remote.Mongo.Interfaces;
 
@@ -33,4 +34,6 @@ public interface IMongoRepository<TDocument> where TDocument : IDocument
     Task DeleteManyAsync(FilterDefinition<TDocument> filterExpression);
     Task<ObjectId> UploadFileAsync(byte[] data, string fileName);
     Task<byte[]> RetrieveFileAsync(ObjectId id);
+    public IAsyncCursor<GridFSFileInfo<ObjectId>> GetFileInfo(ObjectId id);
+    public Task<IAsyncCursor<GridFSFileInfo<ObjectId>>> GetFileInfoAsync(ObjectId id);
 }
