@@ -12,12 +12,12 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 
 public abstract class BaseService
 {
-    public string UrlToUse { get; }
+    public string UrlToUse { get; protected set; }
     public abstract string BaseUrl { get; }
     public abstract string StageUrl { get; }
 
-    internal FortniteApiClient Client { get; set; }
-    internal RestClient RestClient { get; set; }
+    public FortniteApiClient Client { get; internal set; }
+    public RestClient RestClient { get; internal set; }
     internal EEnvironment Environment { get; set; }
 
     internal BaseService(FortniteApiClient client, EEnvironment environment)
@@ -33,13 +33,14 @@ public abstract class BaseService
         RestClient = client.CreateRestClient(this);
     }
 
-    internal virtual byte[] DownloadFile(
+    public virtual byte[] DownloadFile(
         RestRequest request,
         bool withAuth = false,
-        string accessToken = null)
+        string accessToken = null,
+        RestClient client = null)
     {
         if (withAuth) request.AddHeader("Authorization", $"bearer {accessToken ?? Client.CurrentLogin.AccessToken}");
-        var response = RestClient.Execute(request);
+        var response = (client ?? RestClient).Execute(request);
         byte[] ret = null;
         if (response.IsSuccessful) ret = response.RawBytes;
         return ret;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -165,7 +165,7 @@ public class FortniteApiClient : IAsyncDisposable
     public FortniteContentWebsite ContentWebsite { get; }
 
     private readonly Action<RestClient> _restClientAction;
-    private readonly string _userAgent;
+    public readonly string _userAgent;
 
     private IScheduler _scheduler;
 
