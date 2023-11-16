@@ -8,7 +8,7 @@ namespace MercuryCommons.Framework.Fortnite.API.Services;
 
 public class EventsPublicService(FortniteApiClient client, EEnvironment environment) : BaseService(client, environment)
 {
-    public override string BaseUrl => "https://events-public-service-live.ol.epicgames.com";
+    public override string BaseUrl => "https://events-public-service-prod.ol.epicgames.com";
     public override string StageUrl => "https://events-public-service-stage.ol.epicgames.com";
 
     public async Task<FortniteResponse<EventsResponse>> GetEventsList(
