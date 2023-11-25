@@ -10,6 +10,7 @@ namespace MercuryCommons.Framework.Data.Remote.Mongo.Interfaces;
 public interface IMongoRepository<TDocument> where TDocument : IDocument
 {
     IQueryable<TDocument> AsQueryable();
+    List<TDocument> ToList();
     IEnumerable<TDocument> FilterBy(FilterDefinition<TDocument> filterExpression);
     IEnumerable<TProjected> FilterBy<TProjected>(FilterDefinition<TDocument> filterExpression, ProjectionDefinition<TDocument, TProjected> projectionExpression);
     TDocument FindOne(FilterDefinition<TDocument> filterExpression);
