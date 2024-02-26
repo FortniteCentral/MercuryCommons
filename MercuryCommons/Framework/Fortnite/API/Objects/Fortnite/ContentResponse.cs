@@ -8,57 +8,15 @@ public class ContentResponse
     [J("_activeDate")] public DateTime ActiveDate { get; set; }
     [J] public DateTime LastModified { get; set; }
     [J("_locale")] public string Locale { get; set; }
-    [J] public FortSubGameInfo SubGameInfo { get; set; }
-    [J] public FortAthenaMessage AthenaMessage { get; set; }
-    [J] public FortNewsBase BattleRoyaleNews { get; set; }
-    [J] public FortLobby Lobby { get; set; }
-    [J] public FortSurvivalMessage SurvivalMessage { get; set; }
-    [J] public FortNewsBase CreativeNews { get; set; }
-    [J] public FortNewsBase SaveTheWorldNews { get; set; }
-    [J] public FortEmergencyNotice EmergencyNotice { get; set; }
-    [J] public FortKoreanCafe KoreanCafe { get; set; }
-    [J] public FortBattlePassAboutMessages BattlePassAboutMessages { get; set; }
-    [J] public FortLoginMessage LoginMessage { get; set; }
     [J] public FortDynamicBackgrounds DynamicBackgrounds { get; set; }
-    [J] public FortSubGameSelectData SubGameSelectData { get; set; }
-    [J] public FortPlaylistInformation PlaylistInformation { get; set; }
     [J] public FortCreativeAdFeatures CreativeFeatures { get; set; }
     [J] public FortCreativeAdFeatures CreativeAds { get; set; }
-
     [J] public FortTournamentInformation TournamentInformation { get; set; }
-
-    // public FortComics Comics { get; set; }
-    [J] public FortShopSections ShopSections { get; set; }
-    [J] public FortNewsBaseV2 CreativeNewsV2 { get; set; }
-    [J] public FortNewsBaseV2 BattleRoyaleNewsV2 { get; set; }
     [J] public FortRadioStations RadioStations { get; set; }
     [J] public FortSubscription Subscription { get; set; }
-    [J] public FortEmergencyNoticeV2 EmergencyNoticeV2 { get; set; }
     [J] public FortShopCarousel ShopCarousel { get; set; }
+    [J] public FortEventScreens EventScreens { get; set; }
     [J] public FortMPItemShop MPItemShop { get; set; }
-}
-
-public class FortSubGameInfo
-{
-    [J] public FortSubGame BattleRoyale { get; set; }
-    [J] public FortSubGame SaveTheWorld { get; set; }
-    [J] public FortSubGame Creative { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortSubGame
-{
-    [J] public string Image { get; set; }
-    [J] public string Color { get; set; }
-    [J] public string SpecialMessage { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public string Description { get; set; }
-    [J] public string Subgame { get; set; }
-    [J] public string StandardMessageLine2 { get; set; }
-    [J] public string Title { get; set; }
-    [J] public string StandardMessageLine1 { get; set; }
 }
 
 public class FortShopCarousel
@@ -179,75 +137,6 @@ public class FortRadioStation
     [J] public string Title { get; set; }
 }
 
-public class FortNewsBaseV2
-{
-    [J] public FortNewsV2 News { get; set; }
-    [J("_title")] public string Title { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortNewsV2
-{
-    [J] public FortMotdV2[] Motds { get; set; }
-    [J("_type")] public string Type { get; set; }
-}
-
-public class FortMotdV2
-{
-    [J] public string EntryType { get; set; }
-    [J] public string Image { get; set; }
-    [J] public string TileImage { get; set; }
-    [J] public bool VideoMute { get; set; }
-    [J] public bool Hidden { get; set; }
-    [J] public string TabTitleOverride { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public string Title { get; set; }
-    [J] public string Body { get; set; }
-    [J] public string OfferAction { get; set; }
-    [J] public bool VideoLoop { get; set; }
-    [J] public bool VideoStreamingEnabled { get; set; }
-    [J] public int SortingPriority { get; set; }
-    [J] public string ButtonTextOverride { get; set; }
-    [J] public string OfferId { get; set; }
-    [J] public string Id { get; set; }
-    [J] public bool VideoAutoplay { get; set; }
-    [J] public bool VideoFullscreen { get; set; }
-    [J] public bool Spotlight { get; set; }
-}
-
-public class FortShopSections
-{
-    [J("_title")] public string Title { get; set; }
-    [J] public FortSectionList SectionList { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortSectionList
-{
-    [J("_type")] public string Type { get; set; }
-    [J] public FortSection[] Sections { get; set; }
-}
-
-public class FortSection
-{
-    [J("bSortOffersByOwnership")] public bool SortOffersByOwnership { get; set; }
-    [J("bShowIneligibleOffersIfGiftable")] public bool ShowIneligibleOffersIfGiftable { get; set; }
-    [J("bEnableToastNotification")] public bool EnableToastNotification { get; set; }
-    [J] public FortBackground Background { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public int LandingPriority { get; set; }
-    [J("bHidden")] public bool Hidden { get; set; }
-    [J] public string SectionId { get; set; }
-    [J("bShowTimer")] public bool ShowTimer { get; set; }
-    [J] public string SectionDisplayName { get; set; }
-    [J("bShowIneligibleOffers")] public bool ShowIneligibleOffers { get; set; }
-    [I] public bool HasSentAdded { get; set; }
-}
-
 public class FortCreativeAdFeatures
 {
     [J("ad_info")] public FortAdInfo AdInfo { get; set; }
@@ -261,42 +150,6 @@ public class FortCreativeAdFeatures
         // ???
         [J("_type")] public string Type { get; set; }
     }
-}
-
-public class FortSubGameSelectData
-{
-    [J] public FortSubGameSelect SaveTheWorldUnowned { get; set; }
-    [J("_title")] public string Title { get; set; }
-    [J] public FortSubGameSelect BattleRoyale { get; set; }
-    [J] public FortSubGameSelect Creative { get; set; }
-    [J] public FortSubGameSelect SaveTheWorld { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-
-    public class FortSubGameSelect
-    {
-        [J("_title")] public string Title { get; set; }
-        [J] public FortMessage Message { get; set; }
-    }
-}
-
-public class FortPlaylistInformation
-{
-    [J("is_tile_hidden")] public bool TileHidden { get; set; }
-    [J("frontend_matchmaking_header_style")]
-    public string FrontendMatchmakingHeaderStyle { get; set; }
-    [J("conversion_config")] public FortConversionConfig ConversionConfig { get; set; }
-    [J("show_ad_violator")] public bool ShowAdViolator;
-    [J("_title")] public string Title { get; set; }
-    [J("frontend_matchmaking_header_text_description")]
-    public string FrontendMatchmakingHeaderTextDescription { get; set; }
-    [J("frontend_matchmaking_header_text")]
-    public string FrontendMatchmakingHeaderText { get; set; }
-    [J("playlist_info")] public FortPlaylistInfo PlaylistInfo { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
 }
 
 public class FortTournamentInformation
@@ -344,24 +197,6 @@ public class FortTournament
     [J("base_color")] public string BaseColor { get; set; }
 }
 
-public class FortPlaylistInfo
-{
-    [J("_type")] public string Type { get; set; }
-    [J] public FortPlaylist[] Playlists { get; set; }
-}
-
-public class FortPlaylist
-{
-    [J] public string Image { get; set; }
-    [J("playlist_name")] public string PlaylistName { get; set; }
-    [J] public bool Hidden { get; set; }
-    [J] public string Violator { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public string Description { get; set; }
-    [J("display_subname")] public string DisplaySubname { get; set; }
-    [J("display_name")] public string DisplayName { get; set; }
-}
-
 public class FortConversionConfig
 {
     [J] public string ContainerName { get; set; }
@@ -392,155 +227,70 @@ public class FortBackground
     [J] public string Key { get; set; }
 }
 
-public class FortBattlePassAboutMessages
-{
-    [J] public FortNews News { get; set; }
-    [J("_title")] public string Title { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortEmergencyNotice
-{
-    [J] public FortNews News { get; set; }
-    [J("_title")] public string Title { get; set; }
-    [J] public bool AlwaysShow { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortEmergencyNoticeV2
+public class FortEventScreens
 {
     [J("_title")] public string Title { get; set; }
-    [J] public FortEmergencyNotices EmergencyNotices { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-
-    public class FortEmergencyNotices
-    {
-        [J("_type")] public string Type { get; set; }
-        [J] public FortMessage[] EmergencyNotices { get; set; }
-    }
+    [J] public FortEventScreenGroup EventScreenGroup { get; set; }
 }
 
-public class FortKoreanCafe
+public class FortEventScreenGroup
 {
-    [J("_title")] public string Title { get; set; }
-    [J("cafe_info")] public FortCafeInfo CafeInfo { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortCafeInfo
-{
-    [J] public FortCafe[] Cafes { get; set; }
     [J("_type")] public string Type { get; set; }
+    [J] public FortEventScreenData[] EventScreens { get; set; }
 }
 
-public class FortCafe
+public class FortEventScreenData
 {
-    [J("korean_cafe")] public string KoreanCafe { get; set; }
-    [J("korean_cafe_description")] public string KoreanCafeDescription { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J("korean_cafe_header")] public string KoreanCafeHeader { get; set; }
+    [J] public string EventCMSId { get; set; }
+    [J] public string EventName { get; set; }
+    [J] public string EventDescription { get; set; }
+    [J] public string ResourceHeader { get; set; }
+    [J] public string StarterHeader { get; set; }
+    [J] public string CompletionHeader { get; set; }
+    [J] public string EventCTA { get; set; }
+    [J] public string EventCTACompleted { get; set; }
+    [J] public string HeaderCTA { get; set; }
+    [J] public string ItemShopCallout { get; set; }
+    [J] public string CTAIconURL { get; set; }
+    [J] public string KeyArtURL { get; set; }
+    [J] public string MoreInfoHeader { get; set; }
+    [J] public string MoreInfoSubHeader { get; set; }
+    [J] public string MoreInfoLegal { get; set; }
+    [J] public EventScreenCMSMoreInfoGroup[] MoreInfoGroups { get; set; }
+    [J] public string PurchaseLegal { get; set; }
+    [J] public string RewardTrackLegal { get; set; }
+    [J] public string ItemShopOfferId { get; set; }
+    [J] public string PremiumUpsellUnownedHeader { get; set; }
+    [J] public string PremiumUpsellUnownedBody { get; set; }
+    [J] public string PremiumUpsellOwnedHeader { get; set; }
+    [J] public string PremiumUpsellOwnedBody { get; set; }
+    [J] public string PremiumUpsellIconURL { get; set; }
+    [J] public string PurchasePremiumTrackHeader { get; set; }
+    [J] public string[] PurchasePremiumTrackBodyList { get; set; }
+    [J] public string InspectSpecialItemUnowned { get; set; }
+    [J] public string InspectSpecialItemOwned { get; set; }
+    [J] public string InspectSpecialPremiumItemUnowned { get; set; }
+    [J] public string InspectSpecialPremiumItemOwned { get; set; }
+    [J] public EventScreenResourceGroupOverrides[] ResourceGroupOverrides { get; set; }
 }
 
-public class FortSurvivalMessage
+public class EventScreenCMSMoreInfoGroup
 {
-    [J] public FortOverrideableMessage OverrideableMessage { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortAthenaMessage
-{
-    [J] public FortOverrideableMessage OverrideableMessage { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortOverrideableMessage
-{
-    [J] public FortMessage Message { get; set; }
-    [J("_title")] public string Title { get; set; }
     [J] public string Header { get; set; }
-    [J] public string Style { get; set; }
-    [J] public bool AlwaysShow { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortLobby
-{
-    [J] public string BackgroundImage { get; set; }
-    [J] public string Stage { get; set; }
-    [J("_title")] public string Title { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
-}
-
-public class FortNews
-{
-    [J] public FortMessage[] Messages { get; set; }
-    [J("platform_messages")] public FortMessage[] PlatformMessages { get; set; } // TODO Double Check
-    [J("platform_motds")] public FortPlatformMotd[] PlatformMotds { get; set; }
-}
-
-public class FortPlatformMotd
-{
-    [J] public bool Hidden { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public FortMessage Message { get; set; }
-    [J] public string Platform { get; set; }
-}
-
-public class FortMessage
-{
-    [J] public string Layout { get; set; }
-    [J] public string EntryType { get; set; }
-    [J] public string Image { get; set; }
-    [J] public string TileImage { get; set; }
-    [J] public bool Hidden { get; set; }
-    [J] public bool VideoMute { get; set; }
-    [J] public string MessageType { get; set; }
-    [J("_type")] public string Type { get; set; }
-    [J] public string Title { get; set; }
     [J] public string Body { get; set; }
-    [J] public bool VideoLoop { get; set; }
-    [J] public bool VideoStreamingEnabled { get; set; }
-    [J] public string Id { get; set; }
-    [J] public bool VideoAutoplay { get; set; }
-    [J] public bool VideoFullscreen { get; set; }
-    [J] public bool Spotlight { get; set; }
+    [J] public string IconURL { get; set; }
 }
 
-public class FortNewsBase
+public class EventScreenResourceGroupOverrides
 {
-    [J] public FortNews News { get; set; }
-}
-
-public class FortLoginMessage
-{
-    [J("_title")] public string Title { get; set; }
-    [J] public FortOverrideableMessage LoginMessage { get; set; }
-    [J("_activeDate")] public DateTime ActiveDate { get; set; }
-    [J] public DateTime LastModified { get; set; }
-    [J("_locale")] public string Locale { get; set; }
+    [J] public int ResourceValue { get; set; }
+    [J] public string KeyArtOverrideURL { get; set; }
 }
 
 public class FortMPItemShop
 {
     [J] public FortMPShopData ShopData { get; set; }
     [J("_title")] public string Title { get; set; }
-    [J] public FortOverrideableMessage LoginMessage { get; set; }
     [J("_activeDate")] public DateTime ActiveDate { get; set; }
     [J] public DateTime LastModified { get; set; }
     [J("_locale")] public string Locale { get; set; }

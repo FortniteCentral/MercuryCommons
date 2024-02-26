@@ -63,4 +63,26 @@ public class FortniteContentWebsite(FortniteApiClient client, EEnvironment envir
             Data = response
         };
     }
+
+    public async Task<FortniteResponse<FortEventScreenData[]>> GetContentEventScreenDataAsync(string lang = "en")
+    {
+        var request = new RestRequest("/content/api/pages/fortnite-game/eventscreens");
+        request.AddParameter("lang", lang);
+        var data = await ExecuteAsync<JObject>(request);
+        if (!data.IsSuccessful)
+        {
+            return new FortniteResponse<FortEventScreenData[]>
+            {
+                Data = null,
+                Error = data.Error,
+                HttpStatusCode = data.HttpStatusCode
+            };
+        }
+
+        var response = data.Data["eventScreenGroup"]?["eventScreens"]?.ToObject<FortEventScreenData[]>();
+        return new FortniteResponse<FortEventScreenData[]>
+        {
+            Data = response
+        };
+    }
 }
