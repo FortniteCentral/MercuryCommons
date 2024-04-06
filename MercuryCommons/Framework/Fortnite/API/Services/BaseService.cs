@@ -33,12 +33,22 @@ public abstract class BaseService
         RestClient = client.CreateRestClient(this);
     }
 
-    public virtual byte[] DownloadFile(
+    public virtual async Task<byte[]> DownloadFile(
         RestRequest request,
         bool withAuth = false,
         string accessToken = null,
+        bool requiresLogin = false,
         RestClient client = null)
     {
+        if (requiresLogin)
+        {
+            var isLoggedIn = await Client.VerifyTokenAsync().ConfigureAwait(false);
+            if (!isLoggedIn)
+            {
+                throw new FortniteException("You need to be logged in to use this!");
+            }
+        }
+        
         if (withAuth) request.AddHeader("Authorization", $"bearer {accessToken ?? Client.CurrentLogin.AccessToken}");
         var response = (client ?? RestClient).Execute(request);
         byte[] ret = null;

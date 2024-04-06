@@ -22,7 +22,7 @@ public class FortnitePublicService(FortniteApiClient client, EEnvironment enviro
     public byte[] GetCloudstorageFile(string uniqueFilename)
     {
         var request = new RestRequest($"/fortnite/api/cloudstorage/system/{uniqueFilename}");
-        var response = DownloadFile(request, true);
+        var response = DownloadFile(request, true).GetAwaiter().GetResult();
         return response;
     }
 

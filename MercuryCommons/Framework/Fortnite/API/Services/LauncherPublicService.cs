@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using EpicManifestParser.Objects;
+using EpicManifestParser.Api;
 using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects.Auth;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace MercuryCommons.Framework.Fortnite.API.Services;
@@ -14,9 +13,6 @@ public class LauncherPublicService(FortniteApiClient client, EEnvironment enviro
 
     public async Task<ManifestInfo> GetGameManifestAsync((string, string, string, string) items, string label = "Live", AuthResponse auth = null)
         => await GetGameManifestAsync(items.Item1, items.Item2, items.Item3, items.Item4, label, auth);
-
-    public async Task<ContentBuildManifestInfo> GetManifestV1Async((string, string, string, string) items, string label = "Live", AuthResponse auth = null)
-        => await GetManifestV1Async(items.Item1, items.Item2, items.Item4, label, auth);
 
     /// <summary>
     /// Gets the manifest information for the specified game
@@ -33,16 +29,8 @@ public class LauncherPublicService(FortniteApiClient client, EEnvironment enviro
         var authResponse = auth ?? (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
         var request = new RestRequest($"/launcher/api/public/assets/v2/platform/{platform}/namespace/{@namespace}/catalogItem/{catalogId}/app/{appId}/label/{label}", Method.Post);
         if (@namespace == "fn" && platform is "Android" or "IOS" && catalogId == "4fe75bbc5a674f4f9b356b5c90567da5") request.AddJsonBody(new { abis = new[] { "arm64-v8a" } }); // Manual
-        var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
-        return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
-    }
-
-    public async Task<ContentBuildManifestInfo> GetManifestV1Async(string appId, string catalogId, string platform = "Windows", string label = "Live", AuthResponse auth = null)
-    {
-        var authResponse = auth ?? (await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2)).Data;
-        var request = new RestRequest($"/launcher/api/public/assets/{platform}/{catalogId}/{appId}?label={label}");
-        var response = await ExecuteAsync<object>(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
-        return response.IsSuccessful && response.Data != null ? new ContentBuildManifestInfo(JsonConvert.SerializeObject(response.Data)) : null;
+        var response = await DownloadFile(request, true, accessToken: authResponse.AccessToken, requiresLogin: false);
+        return response != null ? ManifestInfo.Deserialize(response) : null;
     }
 
     /// <summary>
@@ -54,7 +42,7 @@ public class LauncherPublicService(FortniteApiClient client, EEnvironment enviro
         var launcher = await Client.AccountPublicService.GetAccessTokenAsync(GrantType.ClientCredentials, ClientToken.LauncherAppClient2);
         if (!launcher.IsSuccessful) return null;
         var request = new RestRequest("/launcher/api/public/assets/v2/platform/Windows/launcher/label/Live-Firebrand", Method.Post);
-        var response = await ExecuteAsync<object>(request, true, accessToken: launcher.Data.AccessToken, requiresLogin: false);
-        return response.IsSuccessful && response.Data != null ? new ManifestInfo(JsonConvert.SerializeObject(response.Data), 1) : null;
+        var response = await DownloadFile(request, true, accessToken: launcher.Data.AccessToken, requiresLogin: false);
+        return response != null ? ManifestInfo.Deserialize(response) : null;
     }
 }
