@@ -28,7 +28,6 @@
     <PackageReference Include="CUE4Parse-Conversion" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="EpicManifestParser" Version="2.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.24.0" />
@@ -41,6 +40,10 @@
     <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
     <PackageReference Include="Quartz" Version="3.8.1" />
     <PackageReference Include="Quartz.Jobs" Version="3.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EpicManifestParser\src\EpicManifestParser\EpicManifestParser.csproj" />
   </ItemGroup>
 
 </Project>
