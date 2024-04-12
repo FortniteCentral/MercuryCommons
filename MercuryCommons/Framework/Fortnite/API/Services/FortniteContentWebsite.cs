@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MercuryCommons.Framework.Fortnite.API.Enums;
 using MercuryCommons.Framework.Fortnite.API.Objects;
 using MercuryCommons.Framework.Fortnite.API.Objects.Fortnite;
@@ -64,14 +65,14 @@ public class FortniteContentWebsite(FortniteApiClient client, EEnvironment envir
         };
     }
 
-    public async Task<FortniteResponse<FortEventScreenData[]>> GetContentEventScreenDataAsync(string lang = "en")
+    public async Task<FortniteResponse<List<FortEventScreenData>>> GetContentEventScreenDataAsync(string lang = "en")
     {
         var request = new RestRequest("/content/api/pages/fortnite-game/eventscreens");
         request.AddParameter("lang", lang);
         var data = await ExecuteAsync<JObject>(request);
         if (!data.IsSuccessful)
         {
-            return new FortniteResponse<FortEventScreenData[]>
+            return new FortniteResponse<List<FortEventScreenData>>
             {
                 Data = null,
                 Error = data.Error,
@@ -79,8 +80,25 @@ public class FortniteContentWebsite(FortniteApiClient client, EEnvironment envir
             };
         }
 
-        var response = data.Data["eventScreenGroup"]?["eventScreens"]?.ToObject<FortEventScreenData[]>();
-        return new FortniteResponse<FortEventScreenData[]>
+        var response = data.Data["eventScreenGroup"]?["eventScreens"]?.ToObject<List<FortEventScreenData>>() ?? [];
+
+        foreach (var prop in data.Data.Properties())
+        {
+            try
+            {
+                var screen = prop.Value.ToObject<JObject>();
+                if (!screen.ContainsKey("eventScreenData")) continue;
+                var screenData = screen["eventScreenData"]?.ToObject<FortEventScreenData>();
+                if (screenData?.EventCMSId == null) continue;
+                response.Add(screenData);
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+        
+        return new FortniteResponse<List<FortEventScreenData>>
         {
             Data = response
         };
