@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -18,7 +19,7 @@ public class MercuryWeb
     private static readonly RestClient Client = new(new RestClientOptions
     {
         UserAgent = $"Mercury/{Assembly.GetExecutingAssembly().GetName().Version}",
-        MaxTimeout = 3 * 1000
+        Timeout = TimeSpan.FromSeconds(5)
     }, configureSerialization: s => s.UseSerializer<JsonNetSerializer>());
 
     /// <summary>
