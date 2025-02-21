@@ -314,7 +314,7 @@ public class FortMPMetadata
 {
     [J] public object[] OfferGroups { get; set; } // Only need length
     [J] public string ShowIneligibleOffers { get; set; }
-    [J] public FortMPBackground Background { get; set; }
+    [J] public dynamic Background { get; set; } // FortMPBackground or FortMPBackground[]
     [J] public FortMPStackRank[] StackRanks { get; set; }
     [J] public FortMPItemShopSubsection[] Subsections { get; set; }
 }
