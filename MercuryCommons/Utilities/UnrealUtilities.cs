@@ -50,16 +50,4 @@ public static class UnrealUtilities
 
     public static bool TryLoadObject<T>(FSoftObjectPath path, out T export) where T : UObject => TryLoadObject(path.AssetPathName.Text, out export);
     public static bool TryLoadObject<T>(string fullPath, out T export) where T : UObject => Provider.TryLoadPackageObject(fullPath.Replace(".uasset", string.Empty), out export);
-
-    public static SKBitmap GetBitmap(FSoftObjectPath? softObjectPath) => GetBitmap(softObjectPath?.AssetPathName.Text);
-    public static SKBitmap GetBitmap(string fullPath) => TryLoadObject(fullPath, out UTexture texture) ? GetBitmap(texture) : null;
-    public static SKBitmap GetBitmap(UTexture texture) => texture?.Decode();
-    public static SKBitmap GetBitmap(FPackageIndex packageIndex)
-    {
-        while (true)
-        {
-            if (!packageIndex.TryLoad(out var export)) return null;
-            if (export is UTexture texture) return GetBitmap(texture);
-        }
-    }
 }
